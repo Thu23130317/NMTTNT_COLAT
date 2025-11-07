@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.MenuController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="612.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/banco.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="nameGame" contentDisplay="CENTER" layoutX="147.0" layoutY="48.0" text="CỜ LẬT" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="70.0" fitWidth="98.0" layoutX="164.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/nutplay.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
