@@ -6,22 +6,28 @@
 
 /* Áp dụng cho nút JFXButton  */
 .jfx-button {
+    /* Xóa nền mặc định của nút */
     -fx-background-color: transparent;
 }
 
+/* Thêm hiệu ứng phát sáng khi di chuột qua nút chơi [cite: 1, 3] */
 .jfx-button:hover {
     -fx-effect: dropshadow(gaussian, rgb(53,204,102), 15, 0.7, 0, 0); /* Màu vàng gold */
 }
+/* --- Thêm vào file style.css --- */
 
+/* Nền cho màn hình cài đặt */
 .settings-root {
     -fx-background-color: #f0f0f0; /* Một màu nền sáng */
 }
 
+/* Tiêu đề "CHỌN CHẾ ĐỘ CHƠI" */
 .settings-title {
     -fx-text-fill: #333;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.1, 0, 2);
 }
 
+/* Nút "Quay lại" (để khác biệt với nút Bắt đầu) */
 .back-button {
     -fx-background-color: #B0BEC5; /* Màu xám nhạt */
     -fx-text-fill: black;
@@ -31,6 +37,7 @@
     -fx-background-color: #90A4AE;
 }
 
+/* Tùy chỉnh RadioButton */
 .radio-button {
     -fx-text-fill: #263238;
 }
@@ -41,28 +48,35 @@
 }
 
 .radio-button:selected .radio .dot {
-    -fx-background-color: #00796B;
+    -fx-background-color: #00796B; /* Màu xanh lá đậm */
 }
+/* --- Thêm vào file style.css --- */
 
+/* Nền cho cửa sổ Game Over */
 .game-over-root {
-    -fx-background-color: #FAFAFA;
+    -fx-background-color: #FAFAFA; /* Màu trắng kem */
     -fx-border-color: #333;
     -fx-border-width: 2px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 15, 0.0, 0, 5);
 }
 
+/* Tiêu đề "KẾT THÚC TRÒ CHƠI" */
 .game-over-title {
-    -fx-text-fill: #D32F2F;
+    -fx-text-fill: #D32F2F; /* Màu đỏ đậm */
 }
+/* --- Thêm vào file style.css --- */
 
+/* Nền cho màn hình Hướng dẫn */
 .how-to-play-root {
-    -fx-background-color: #ECEFF1;
+    -fx-background-color: #ECEFF1; /* Màu xám rất nhạt */
 }
 
+/* Tiêu đề "HƯỚNG DẪN CHƠI" */
 .how-to-play-title {
-    -fx-text-fill: #00695C;
+    -fx-text-fill: #00695C; /* Màu xanh đậm */
 }
 
+/* Vùng chứa văn bản luật chơi */
 .rules-text-flow {
-    -fx-line-spacing: 5px;
+    -fx-line-spacing: 5px; /* Giãn cách dòng */
 }
