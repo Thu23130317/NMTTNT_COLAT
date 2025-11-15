@@ -16,10 +16,16 @@ public class Move {
     public String toString() {
         return "(" + row + ", " + col + ")";
     }
+
     public int getRow() {
         return row;
     }
+
     public int getCol() {
         return col;
+    }
+
+    public List<int[]> getFlippedDiscs() {
+        return flipped;
     }
 }

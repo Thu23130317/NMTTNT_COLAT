@@ -18,12 +18,16 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>17.0.6</version>
-        </dependency>
+            <version>21.0.2</version> </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>17.0.6</version>
+            <version>21.0.2</version> </dependency>
+
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>9.0.10</version>
         </dependency>
 
         <dependency>
@@ -47,8 +51,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <source>24</source>
-                    <target>24</target>
+                    <source>24</source> <target>24</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -57,10 +60,9 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.doangamecolat/com.example.doangamecolat.HelloApplication</mainClass>
+                            <mainClass>com.example.doangamecolat.Main</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

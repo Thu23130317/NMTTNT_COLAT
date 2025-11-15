@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" styleClass="how-to-play-root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.HowToPlayController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" styleClass="how-to-play-root" stylesheets="/com/example/doangamecolat/css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.HowToPlayController">
     <top>
         <Label styleClass="how-to-play-title" text="HƯỚNG DẪN CHƠI CỜ LẬT" BorderPane.alignment="CENTER">
             <font>

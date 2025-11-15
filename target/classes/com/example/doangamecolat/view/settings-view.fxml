@@ -4,12 +4,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" styleClass="settings-root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.SettingsController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" styleClass="settings-root" stylesheets="/com/example/doangamecolat/css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.SettingsController">
     <children>
         <Label styleClass="settings-title" text="CHỌN CHẾ ĐỘ CHƠI">
             <font>
@@ -25,17 +24,13 @@
                     </font>
                 </Label>
                 <fx:define>
-                    <ToggleGroup fx:id="modeGroup" />
                 </fx:define>
-                <RadioButton fx:id="pvpButton" mnemonicParsing="false" selected="true" text="Người vs Người" toggleGroup="$modeGroup">
+                <RadioButton fx:id="pveButton" mnemonicParsing="false" text="Người vs Máy">
                     <font>
                         <Font size="16.0" />
                     </font>
-                </RadioButton>
-                <RadioButton fx:id="pveButton" mnemonicParsing="false" text="Người vs Máy" toggleGroup="$modeGroup">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
+               <toggleGroup>
+               </toggleGroup>
                 </RadioButton>
             </children>
         </VBox>
@@ -48,10 +43,11 @@
                     </font>
                 </Label>
                 <fx:define>
-                    <ToggleGroup fx:id="difficultyGroup" />
                 </fx:define>
-                <RadioButton fx:id="easyButton" mnemonicParsing="false" text="Dễ (Depth 2)" toggleGroup="$difficultyGroup">
+                <RadioButton fx:id="easyButton" mnemonicParsing="false" text="Dễ (Depth 2)">
                     <font><Font size="16.0" /></font>
+               <toggleGroup>
+               </toggleGroup>
                 </RadioButton>
                 <RadioButton fx:id="mediumButton" mnemonicParsing="false" selected="true" text="Trung bình (Depth 4)" toggleGroup="$difficultyGroup">
                     <font><Font size="16.0" /></font>
@@ -65,7 +61,7 @@
         <HBox alignment="CENTER" spacing="30.0">
             <children>
                 <Button fx:id="startButton" mnemonicParsing="false" onAction="#onStartButtonPress" prefHeight="40.0" prefWidth="120.0" text="Bắt đầu" />
-                <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonPress" prefHeight="40.0" prefWidth="120.0" styleClass="back-button" text="Quay lại Menu" />
+                <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackBtn" prefHeight="40.0" prefWidth="120.0" styleClass="back-button" text="Quay lại Menu" />
             </children>
             <VBox.margin>
                 <Insets top="20.0" />

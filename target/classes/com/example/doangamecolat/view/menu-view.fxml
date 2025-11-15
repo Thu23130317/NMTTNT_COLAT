@@ -18,7 +18,7 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <JFXButton alignment="CENTER" layoutX="150.0" layoutY="270.0" onAction="#onPlayButtonPress" text=" " textAlignment="CENTER">
+      <JFXButton alignment="CENTER" layoutX="150.0" layoutY="270.0" onAction="#onPlayBtn" text=" " textAlignment="CENTER">
          <graphic>
             <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                <image>

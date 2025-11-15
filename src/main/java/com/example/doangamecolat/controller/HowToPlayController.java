@@ -1,24 +1,18 @@
 package com.example.doangamecolat.controller;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 
-public class MenuController {
+public class HowToPlayController {
     @FXML
-    private JFXButton playButton;
-
-    @FXML
-    private void onPlayBtn(ActionEvent event) throws IOException {
+    private void onBackBtn(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/doangamecolat/view/settings-view.fxml"));
         Parent settingsRoot = loader.load();
 

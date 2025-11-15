@@ -23,4 +23,22 @@ public class GameOverController {
     private Button menuButton;
 
     private Stage gameBoardStage;
+    @FXML
+    private void onMenuBtn(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/doangamecolat/view/settings-view.fxml"));
+        Parent settingsRoot = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(settingsRoot));
+        stage.setTitle("Cài đặt Game");
+    }
+    @FXML
+    private void onPlayAgain(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/doangamecolat/view/settings-view.fxml"));
+        Parent settingsRoot = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(settingsRoot));
+        stage.setTitle("Cài đặt Game");
+    }
 }
