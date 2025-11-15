@@ -12,7 +12,6 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/doangamecolat/view/menu-view.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
-        stage.setTitle("Menu Cờ Lật");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

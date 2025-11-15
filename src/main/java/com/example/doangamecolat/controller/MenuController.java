@@ -19,7 +19,6 @@ public class MenuController {
 
     @FXML
     private void onPlayButtonPress(ActionEvent event) throws IOException {
-        // Tải màn hình Cài đặt (settings-view.fxml)
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/doangamecolat/view/settings-view.fxml"));
         Parent settingsRoot = loader.load();
 

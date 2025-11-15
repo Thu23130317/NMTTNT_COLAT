@@ -36,7 +36,7 @@
         </ScrollPane>
     </center>
     <bottom>
-        <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonPress" styleClass="back-button" text="Quay lại Menu" BorderPane.alignment="CENTER">
+        <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackBtn" styleClass="back-button" text="Quay lại Menu" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets bottom="20.0" />
             </BorderPane.margin>
