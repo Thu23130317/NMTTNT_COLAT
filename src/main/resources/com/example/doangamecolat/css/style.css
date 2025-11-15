@@ -1,3 +1,68 @@
-#nameGame{
+/* Áp dụng cho tiêu đề "CỜ LẬT"  */
+#nameGame {
+    /* Thêm hiệu ứng đổ bóng để làm nổi bật văn bản trên nền ảnh */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0.5, 2, 2);
+}
 
+/* Áp dụng cho nút JFXButton  */
+.jfx-button {
+    -fx-background-color: transparent;
+}
+
+.jfx-button:hover {
+    -fx-effect: dropshadow(gaussian, rgb(53,204,102), 15, 0.7, 0, 0); /* Màu vàng gold */
+}
+
+.settings-root {
+    -fx-background-color: #f0f0f0; /* Một màu nền sáng */
+}
+
+.settings-title {
+    -fx-text-fill: #333;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.1, 0, 2);
+}
+
+.back-button {
+    -fx-background-color: #B0BEC5; /* Màu xám nhạt */
+    -fx-text-fill: black;
+}
+
+.back-button:hover {
+    -fx-background-color: #90A4AE;
+}
+
+.radio-button {
+    -fx-text-fill: #263238;
+}
+
+.radio-button .radio {
+    -fx-border-color: #546E7A;
+    -fx-background-color: white;
+}
+
+.radio-button:selected .radio .dot {
+    -fx-background-color: #00796B;
+}
+
+.game-over-root {
+    -fx-background-color: #FAFAFA;
+    -fx-border-color: #333;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 15, 0.0, 0, 5);
+}
+
+.game-over-title {
+    -fx-text-fill: #D32F2F;
+}
+
+.how-to-play-root {
+    -fx-background-color: #ECEFF1;
+}
+
+.how-to-play-title {
+    -fx-text-fill: #00695C;
+}
+
+.rules-text-flow {
+    -fx-line-spacing: 5px;
 }

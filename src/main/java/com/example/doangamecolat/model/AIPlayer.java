@@ -14,8 +14,6 @@ public class AIPlayer extends Player {
     }
 
     private Move findBestMove(Board board, Piece color) {
-        // Gọi thuật toán minimax hoặc alpha-beta pruning
-        // tạm thời để trống
         return null;
     }
 }
