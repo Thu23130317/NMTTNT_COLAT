@@ -8,7 +8,6 @@ public class HumanPlayer extends Player {
 
     @Override
     public Move getMove(Board board) {
-        // Tùy vào giao diện (JavaFX) – tạm thời để null
         return null;
     }
 }
