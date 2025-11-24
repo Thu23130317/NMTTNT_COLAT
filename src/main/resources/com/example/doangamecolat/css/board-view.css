@@ -1,0 +1,212 @@
+/* ================= GLOBAL & FONTS ================= */
+@font-face {
+    /* Bạn nên tìm một font chữ kiểu Fantasy (VD: Cinzel Decorative) để thay thế */
+    font-family: 'FantasyFont';
+    /*src: url('../fonts/CinzelDecorative-Bold.ttf');*/
+}
+
+.root {
+    /* Sử dụng font mặc định hệ thống nếu chưa có font fantasy */
+    -fx-font-family: "Segoe UI Bold", "Arial Bold", sans-serif;
+}
+
+/* Nền thư viện mờ ảo */
+.game-background {
+    /* BẠN CẦN: Ảnh nền thư viện mờ */
+    /*-fx-background-image: url("../img/bg_library_blur.jpg");*/
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    /* Lớp phủ màu cam/vàng để tạo không khí ấm cúng */
+    -fx-background-color: linear-gradient(to bottom, rgba(62, 39, 35, 0.8), rgba(255, 160, 0, 0.3));
+}
+
+/* ================= TOP BAR STYLES ================= */
+.player-panel {
+    -fx-pref-width: 350px;
+    -fx-padding: 0 20px;
+}
+
+.avatar-frame, .avatar-frame-ai {
+    -fx-fill: transparent;
+    /* Viền vàng chạm khắc */
+    -fx-stroke: linear-gradient(to bottom, #ffd700, #b8860b);
+    -fx-stroke-width: 4px;
+    -fx-effect: dropshadow(gaussian, #000, 10, 0.5, 0, 0);
+}
+.avatar-frame-ai {
+    /* Màu xám cho AI */
+    -fx-stroke: linear-gradient(to bottom, #a9a9a9, #696969);
+}
+
+.player-name-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffe0b2;
+    -fx-effect: dropshadow(one-pass-box, black, 2, 1, 0, 0);
+}
+
+/* Thanh điểm số phát sáng */
+.score-bar-glow {
+    -fx-min-width: 180px;
+    -fx-max-height: 40px;
+    /* Nền gradient cam rực rỡ */
+    -fx-background-color:
+            linear-gradient(to right, #ff8c00, #ffd700, #ff8c00),
+            linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 50%, rgba(0,0,0,0.2) 100%);
+    -fx-background-radius: 20;
+    -fx-border-color: #fffacd;
+    -fx-border-width: 2px;
+    -fx-border-radius: 20;
+    /* Hiệu ứng phát sáng mạnh ra ngoài */
+    -fx-effect: dropshadow(gaussian, #ff4500, 25, 0.6, 0, 0);
+    -fx-padding: 5px;
+}
+
+.score-text {
+    -fx-font-size: 32px;
+    -fx-text-fill: white;
+    /* Tạo viền chữ màu tối để nổi bật */
+    -fx-effect: dropshadow(two-pass-box, #3e2723, 3, 1, 0, 0);
+}
+
+.turn-label-small {
+    -fx-font-size: 14px;
+    -fx-text-fill: #3e2723;
+}
+.turn-label-large {
+    -fx-font-size: 24px;
+    -fx-font-weight: 900;
+    -fx-text-fill: #3e2723;
+}
+
+/* ================= CENTER BOARD STYLES ================= */
+
+/* Khung gỗ bên ngoài (Dùng CSS giả lập nếu chưa có ảnh) */
+.wood-board-frame-outer {
+    /* Giả lập vân gỗ và viền vàng 3D */
+    -fx-background-color:
+            linear-gradient(to bottom, #8d6e63 0%, #4e342e 100%), /* Màu nền gỗ tối */
+            repeating-linear-gradient(45deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 2px, transparent 2px, transparent 4px); /* Vân gỗ */
+
+    -fx-background-radius: 30px;
+    /* Viền vàng dày, phức tạp */
+    -fx-border-color:
+            linear-gradient(to bottom, #ffd700 0%, #b8860b 100%), /* Viền ngoài */
+            linear-gradient(to bottom, #5d4037 0%, #3e2723 100%); /* Viền trong tạo độ sâu */
+    -fx-border-width: 8px, 4px;
+    -fx-border-insets: 0px, 8px;
+    -fx-border-radius: 30px, 22px;
+
+    /* Bóng đổ lớn tạo cảm giác bàn cờ nổi lên */
+    -fx-effect:
+            dropshadow(three-pass-box, rgba(0,0,0,0.8), 50, 0.3, 0, 20),
+            glow(0.3);
+    -fx-padding: 25px; /* Khoảng cách từ viền đến lưới bên trong */
+}
+
+/* Lưới bên trong */
+.inner-board-grid {
+    /* Màu nền gỗ sáng hơn cho mặt bàn */
+    -fx-background-color: #6d4c41;
+    -fx-background-radius: 10px;
+    /* Hiệu ứng khắc chìm */
+    -fx-effect: rgba(0,0,0,0.6);
+    -fx-border-color: #3e2723;
+    -fx-border-width: 2px;
+}
+
+/* Style cho từng ô cờ (Cần thêm class này vào các Pane trong Java Controller) */
+.grid-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(93, 64, 55, 0.5); /* Đường kẻ mờ giữa các ô */
+    -fx-border-width: 1px;
+}
+.grid-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Sáng nhẹ */
+    -fx-cursor: hand;
+}
+/* --- QUÂN CỜ 3D SIÊU THỰC (Chỉ dùng CSS) --- */
+
+/* Quân Đen */
+.piece-black {
+    /* Nhiều lớp gradient để tạo độ bóng, phản chiếu */
+    -fx-fill: radial-gradient(focus-angle 45deg, focus-distance 20%, center 50% 50%, radius 50%,
+    #aaaaaa 0%,   /* Điểm sáng phản chiếu (specular highlight) */
+    #333333 30%,  /* Màu thân chính */
+    #000000 90%,  /* Màu tối ở viền */
+    #ffd700 100%  /* Viền vàng mỏng ngoài cùng */
+    );
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 5, 0.3, 1, 1);
+    /* Viền vàng bao quanh */
+    -fx-stroke: linear-gradient(to bottom, #ffd700, #b8860b);
+    -fx-stroke-width: 2px;
+}
+
+/* Quân Trắng */
+.piece-white {
+    -fx-fill: radial-gradient(focus-angle 45deg, focus-distance 20%, center 50% 50%, radius 50%,
+    #ffffff 0%,   /* Điểm sáng */
+    #f5f5f5 40%,  /* Màu thân chính */
+    #dcdcdc 90%,  /* Màu tối hơn ở viền */
+    #ffd700 100%
+    );
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 5, 0.3, 1, 1);
+    -fx-stroke: linear-gradient(to bottom, #ffd700, #b8860b);
+    -fx-stroke-width: 2px;
+}
+
+/* Gợi ý nước đi (Ký tự Rune phát sáng) */
+/* BẠN CẦN: Trong Java Controller, khi hiển thị gợi ý, hãy thêm ImageView chứa ảnh rune vào ô cờ */
+.rune-hint-glow {
+    /* CSS không thể vẽ rune, bạn cần ảnh. Đây là hiệu ứng cho ảnh đó */
+    -fx-effect:
+            glow(0.8),
+            dropshadow(gaussian, #ff4500, 15, 0.7, 0, 0);
+}
+
+
+/* ================= BOTTOM BAR STYLES ================= */
+
+/* Nút tròn vàng lộng lẫy */
+.circular-btn-gold {
+    /* Nền gradient vàng/cam đậm */
+    -fx-background-color:
+            linear-gradient(to bottom, #ffecb3 0%, #ffc107 50%, #ff9800 100%), /* Lớp màu chính */
+            radial-gradient(center 50% 0%, radius 50%, rgba(255,255,255,0.6), transparent); /* Bóng kính phía trên */
+
+    -fx-background-radius: 50%;
+    -fx-background-insets: 0, 2; /* Tạo cảm giác có viền kép */
+
+    /* Viền vàng chạm khắc */
+    -fx-border-color:
+            linear-gradient(to bottom, #fff9c4, #ffd700, #ff8f00);
+    -fx-border-width: 5px;
+    -fx-border-radius: 50%;
+
+    /* Hiệu ứng phát sáng bên ngoài */
+    -fx-effect: dropshadow(gaussian, #ff9800, 20, 0.5, 0, 0);
+    -fx-cursor: hand;
+    -fx-padding: 0; /* Xóa padding mặc định để icon nằm giữa */
+}
+
+.circular-btn-gold:hover {
+    /* Sáng rực lên khi di chuột */
+    -fx-background-color: linear-gradient(to bottom, #fff8e1 0%, #ffd54f 50%, #ffb300 100%);
+    -fx-effect: dropshadow(gaussian, #ffd700, 30, 0.7, 0, 0);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.circular-btn-gold:pressed {
+    /* Tối đi và lún xuống khi nhấn */
+    -fx-background-color: linear-gradient(to bottom, #ff9800 0%, #ffc107 100%);
+    -fx-effect: rgba(0,0,0,0.5);
+    -fx-translate-y: 2px;
+}
+
+.bottom-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffca28;
+    -fx-effect: dropshadow(one-pass-box, black, 2, 0.8, 0, 0);
+}
