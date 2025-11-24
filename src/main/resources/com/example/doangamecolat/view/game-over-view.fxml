@@ -3,38 +3,105 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Circle?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" spacing="15.0" styleClass="game-over-root" stylesheets="/com/example/doangamecolat/css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.GameOverController">
+<StackPane styleClass="root-pane" stylesheets="/com/example/doangamecolat/css/over-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.GameOverController">
     <children>
-        <Label styleClass="game-over-title" text="KẾT THÚC TRÒ CHƠI">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-        <Label fx:id="winnerLabel" text="NGƯỜI CHƠI ĐEN THẮNG!">
-            <font>
-                <Font name="System Bold" size="18.0" />
-            </font>
-        </Label>
-        <Label fx:id="scoreLabel" text="Tỉ số: 40 - 24">
-            <font>
-                <Font size="16.0" />
-            </font>
-        </Label>
-        <HBox alignment="CENTER" spacing="20.0">
+        <StackPane>
             <children>
-                <Button fx:id="playAgainButton" mnemonicParsing="false" onAction="#onPlayAgain" prefHeight="35.0" prefWidth="120.0" text="Chơi lại" />
-                <Button fx:id="menuButton" mnemonicParsing="false" onAction="#onMenuBtn" prefHeight="35.0" prefWidth="120.0" styleClass="back-button" text="Về Menu" />
+                <ImageView fitHeight="600.0" fitWidth="1024.0" pickOnBounds="true" preserveRatio="false">
+                    <image>
+                        <Image url="@../img/background_victory.jpg" />
+                    </image>
+                </ImageView>
+
+                <StackPane style="-fx-background-color: rgba(0,0,0,0.5);" />
+
+                <StackPane maxHeight="-Infinity" maxWidth="-Infinity">
+                </StackPane>
+
             </children>
-            <VBox.margin>
-                <Insets top="15.0" />
-            </VBox.margin>
-        </HBox>
+        </StackPane>
+
+        <StackPane maxHeight="-Infinity" maxWidth="-Infinity">
+            <children>
+                <ImageView fitHeight="450.0" fitWidth="650.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../img/wood_frame_board.png" />
+                    </image>
+                </ImageView>
+
+                <VBox alignment="TOP_CENTER" maxWidth="600" spacing="10.0">
+                    <padding>
+                        <Insets top="-40.0" /> </padding>
+                    <children>
+
+                        <ImageView fitHeight="150.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../img/victory_title_3d.png" />
+                            </image>
+                        </ImageView>
+
+                        <HBox alignment="CENTER" spacing="50.0">
+                            <children>
+                                <StackPane>
+                                    <children>
+                                        <ImageView fx:id="blackRingImg" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../img/ring_gold_glow.png" />
+                                            </image>
+                                        </ImageView>
+                                        <VBox alignment="CENTER" spacing="5">
+                                            <Circle radius="8.0" styleClass="disc-black" />
+                                            <Label fx:id="scoreBlackLabel" styleClass="score-number-gold" text="40" />
+                                            <Circle radius="8.0" styleClass="disc-black" />
+                                        </VBox>
+                                    </children>
+                                </StackPane>
+
+                                <StackPane>
+                                    <children>
+                                        <ImageView fx:id="whiteRingImg" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../img/ring_silver_plain.png" />
+                                            </image>
+                                        </ImageView>
+                                        <VBox alignment="CENTER" spacing="5">
+                                            <Circle radius="8.0" styleClass="disc-white" />
+                                            <Label fx:id="scoreWhiteLabel" styleClass="score-number-silver" text="24" />
+                                            <Circle radius="8.0" styleClass="disc-white" />
+                                        </VBox>
+                                    </children>
+                                </StackPane>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </HBox>
+
+                        <Label fx:id="winnerLabel" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-effect: dropshadow(one-pass-box, black, 3, 0.5, 0, 0);" text="BLACK WINS!" textFill="#ffd700">
+                            <VBox.margin>
+                                <Insets bottom="5.0" top="15.0" />
+                            </VBox.margin>
+                        </Label>
+
+                        <HBox alignment="CENTER" spacing="20.0">
+                            <children>
+                                <Button fx:id="playAgainButton" onAction="#onPlayAgain" prefHeight="60" prefWidth="180" styleClass="btn-gem-green" text="Play Again" />
+                                <Button fx:id="menuButton" onAction="#onMenuBtn" prefHeight="60" prefWidth="180" styleClass="btn-gem-brown" text="Menu" />
+                            </children>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
     </children>
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-</VBox>
+</StackPane>

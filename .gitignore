@@ -1,0 +1,8 @@
+# Maven
+target/
+*.log
+
+# IntelliJ IDEA (nếu bạn dùng IntelliJ)
+.idea/
+*.iml
+*.iws
