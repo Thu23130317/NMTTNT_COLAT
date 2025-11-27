@@ -1,187 +1,149 @@
 package com.example.doangamecolat.controller;
 
-import com.example.doangamecolat.model.Board;
-import com.example.doangamecolat.model.Game;
-import com.example.doangamecolat.model.Player;
+import com.example.doangamecolat.model.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable; // Cần thêm cái này
-import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-// Implement Initializable để chạy code ngay khi giao diện hiện lên
-public class GameBoardController implements Initializable {
-
+public class GameBoardController implements Initializable{
+    @FXML private GridPane boardGrid;
     @FXML private Label blackScoreLabel;
     @FXML private Label whiteScoreLabel;
     @FXML private Label currentPlayerLabel;
-    @FXML private GridPane boardGrid;
-
-    // Các button chức năng
-    @FXML private Button pauseButton;
-    @FXML private Button restartButton;
-    @FXML private Button undoButton;
-    @FXML private Button hintButton;
-
-    private final double CELL_SIZE = 45.0; // Kích thước này phải khớp với FXML
 
     @FXML
-    private GridPane gridPane; // Lưới bàn cờ (liên kết từ FXML)
-
+    private void onBack(ActionEvent event) throws IOException {
+        switchScene(event, "/com/example/doangamecolat/view/menu-view.fxml", "Menu Game");
+    }
     @FXML
-    private Label scoreBlackLabel; // Nhãn điểm Đen
+    private void onRestart(ActionEvent event) throws IOException {
+        switchScene(event, "/com/example/doangamecolat/view/game-board-view.fxml", "Chơi Game");
+    }
+    private void switchScene(ActionEvent event, String fxmlPath, String title) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.setTitle(title);
+        stage.show();
+    }
 
-    @FXML
-    private Label scoreWhiteLabel; // Nhãn điểm Trắng
-
-    @FXML
-    private Label turnLabel; // Nhãn báo lượt đi hiện tại
-
+    private final double CELL_SIZE = 45.0;
+    private Game game;
     private Player blackPlayer;
     private Player whitePlayer;
-    private Player currentPlayer;
-    private Board board;
-
-    // --- PHƯƠNG THỨC KHỞI TẠO GAME (Được gọi từ SettingsController) ---
-    public void initGame(Player blackPlayer, Player whitePlayer) {
-        this.blackPlayer = blackPlayer;
-        this.whitePlayer = whitePlayer;
-
-        // Khởi tạo bàn cờ logic mới
-        this.board = new Board();
-
-        // Quy tắc Cờ Lật: Quân ĐEN luôn đi trước
-        this.currentPlayer = this.blackPlayer;
-
-        // Cập nhật giao diện lần đầu
-        updateUI();
-
-        // Nếu người chơi đầu tiên là AI (trường hợp mở rộng), cần kích hoạt AI đi ngay
-        checkAIKhaiCuoc();
-    }
-
-    // Hàm cập nhật giao diện (Vẽ lại bàn cờ, cập nhật điểm)
-    private void updateUI() {
-        // 1. Cập nhật điểm số
-//        int blackScore = board.countPieces(Piece.BLACK);
-//        int whiteScore = board.countPieces(Piece.WHITE);
-
-//        if (scoreBlackLabel != null) scoreBlackLabel.setText("Đen: " + blackScore);
-//        if (scoreWhiteLabel != null) scoreWhiteLabel.setText("Trắng: " + whiteScore);
-
-        // 2. Cập nhật thông báo lượt đi
-        if (turnLabel != null) {
-//            String luotDi = (currentPlayer.getDisc() == Piece.BLACK) ? "Lượt ĐEN đi" : "Lượt TRẮNG đi";
-//            turnLabel.setText(luotDi);
-        }
-
-        // 3. Vẽ lại các quân cờ trên GridPane
-        renderBoard();
-    }
-
-    // Hàm vẽ bàn cờ (Giả định bạn đã có logic vẽ hình ảnh quân cờ)
-    private void renderBoard() {
-        // Xóa các quân cờ cũ trên giao diện (nếu cần)
-        // Duyệt qua mảng board[8][8] và thêm ImageView vào gridPane
-        // (Phần này phụ thuộc vào cách bạn xử lý hình ảnh trong project)
-        System.out.println("Đang vẽ lại bàn cờ...");
-    }
-
-    // Kiểm tra nếu lượt hiện tại là AI thì gọi AI tính nước đi
-    private void checkAIKhaiCuoc() {
-//        if (currentPlayer.isAI()) {
-            // Gọi hàm xử lý nước đi của AI (thường chạy trong Thread khác để không đơ giao diện)
-            System.out.println("AI đang suy nghĩ...");
-            // makeAIMove();
-//        }
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // 1. Vẽ lưới bàn cờ ngay khi mở
         createBoardGrid();
-
-        // 2. (Test) Thử đặt vài quân cờ mẫu để xem CSS hoạt động chưa
-        // Khi có logic Game thật, bạn sẽ gọi hàm updateBoard từ Model
-        placePiece(3, 3, true);  // Trắng
-        placePiece(3, 4, false); // Đen
-        placePiece(4, 3, false); // Đen
-        placePiece(4, 4, true);  // Trắng
     }
 
-    /**
-     * Tạo lưới 8x8 (Chỉ chạy 1 lần đầu game)
-     */
-    private void createBoardGrid() {
-        boardGrid.getChildren().clear();
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                // Tạo ô vuông trong suốt để hiện nền gỗ bên dưới
-                Rectangle cell = new Rectangle(CELL_SIZE, CELL_SIZE);
-                cell.getStyleClass().add("grid-cell"); // Dùng CSS .grid-cell thay vì setFill màu cứng
+    public void initGame(Player blackPlayer, Player whitePlayer) {
+        this.blackPlayer = blackPlayer;
+        this.whitePlayer = whitePlayer;
+        this.game = new Game(blackPlayer, whitePlayer);
 
-                StackPane cellPane = new StackPane(cell);
+        updateUI();
+        checkAIKhaiCuoc();
+    }
 
-                // Lưu tọa độ vào cellPane để xử lý click
-                final int r = row;
-                final int c = col;
-                cellPane.setOnMouseClicked(event -> handleCellClick(r, c));
+    private void handleCellClick(int row, int col) {
+        if (game.isGameOver() || (game.getCurrentPlayer() instanceof AIPlayer)) {
+            return;
+        }
+        boolean success = game.playTurn(row, col);
+        if (success) {
+            updateUI();
+            checkAIKhaiCuoc();
+        } else {
+            System.out.println("Nước đi không hợp lệ!");
+        }
+    }
 
-                boardGrid.add(cellPane, col, row);
+    private void updateUI() {
+        blackScoreLabel.setText(String.valueOf(game.getScore(Piece.BLACK)));
+        whiteScoreLabel.setText(String.valueOf(game.getScore(Piece.WHITE)));
+
+        renderBoard();
+
+        if (game.isGameOver()) {
+            showGameOver();
+        }
+    }
+    private void showGameOver() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/doangamecolat/view/game-over-view.fxml"));
+            Parent root = loader.load();
+
+            GameOverController controller = loader.getController();
+            controller.setScores(game.getScore(Piece.BLACK), game.getScore(Piece.WHITE));
+
+            Stage stage = (Stage) boardGrid.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void renderBoard() {
+        Board board = game.getBoard();
+        for (int r = 0; r < Board.SIZE; r++) {
+            for (int c = 0; c < Board.SIZE; c++) {
+                StackPane cell = getCellPane(r, c);
+                if (cell == null) continue;
+
+                if (cell.getChildren().size() > 1) {
+                    cell.getChildren().remove(1);
+                }
+
+                Piece p = board.getPiece(r, c);
+                if (p != Piece.EMPTY) {
+                    Circle piece = new Circle(CELL_SIZE / 2 - 8);
+                    piece.getStyleClass().add(p == Piece.BLACK ? "piece-black" : "piece-white");
+                    cell.getChildren().add(piece);
+                }
             }
         }
     }
 
-    /**
-     * Xử lý khi người chơi bấm vào ô (row, col)
-     */
-    private void handleCellClick(int row, int col) {
-        System.out.println("Đã bấm vào ô: " + row + ", " + col);
-        // TODO: Gọi logic game kiểm tra nước đi hợp lệ tại đây
-        // Ví dụ: if (game.isValidMove(row, col)) { ... }
-
-        // Test thử: Bấm vào đâu đặt quân đen vào đó
-        placePiece(row, col, false);
+    private void checkAIKhaiCuoc() {
+            System.out.println("AI đang suy nghĩ...");
     }
 
-    /**
-     * Đặt quân cờ lên bàn
-     * @param isWhite: true là Trắng, false là Đen
-     */
-    private void placePiece(int row, int col, boolean isWhite) {
-        // Tìm ô StackPane tại vị trí row, col
-        StackPane cellPane = getCellPane(row, col);
-        if (cellPane == null) return;
+    private void createBoardGrid() {
+        boardGrid.getChildren().clear();
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                Rectangle bg = new Rectangle(CELL_SIZE, CELL_SIZE);
+                bg.getStyleClass().add("grid-cell");
 
-        // Xóa quân cũ nếu có (giữ lại cái background Rectangle ở index 0)
-        if (cellPane.getChildren().size() > 1) {
-            cellPane.getChildren().remove(1);
+                StackPane cellPane = new StackPane(bg);
+                final int row = r;
+                final int col = c;
+                cellPane.setOnMouseClicked(e -> handleCellClick(row, col));
+
+                boardGrid.add(cellPane, c, r);
+            }
         }
-
-        // Tạo quân cờ hình tròn
-        Circle piece = new Circle(CELL_SIZE / 2 - 5); // Trừ đi padding
-
-        // Áp dụng CSS 3D siêu thực bạn đã viết
-        if (isWhite) {
-            piece.getStyleClass().add("piece-white");
-        } else {
-            piece.getStyleClass().add("piece-black");
-        }
-
-        cellPane.getChildren().add(piece);
     }
 
-    // Helper để lấy StackPane từ GridPane (vì GridPane không hỗ trợ get theo index trực tiếp tốt)
-    private StackPane getCellPane(int row, int col) {
+    private StackPane getCellPane(int r, int c) {
         for (var node : boardGrid.getChildren()) {
-            if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == col) {
+            if (GridPane.getRowIndex(node) == r && GridPane.getColumnIndex(node) == c) {
                 return (StackPane) node;
             }
         }

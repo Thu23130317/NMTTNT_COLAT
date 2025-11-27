@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<BorderPane maxWidth="1024.0" prefHeight="400.0" styleClass="game-background" stylesheets="/com/example/doangamecolat/css/board-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.GameBoardController">
+<BorderPane maxWidth="1024.0" prefHeight="400.0" styleClass="game-background" stylesheets="/com/example/doangamecolat/css/board-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.GameBoardController">
 
     <top>
         <StackPane BorderPane.alignment="CENTER">
@@ -137,47 +137,39 @@
                 <VBox alignment="CENTER" spacing="3.0">
                     <Button fx:id="pauseButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="40.0" styleClass="circular-btn-gold">
                         <graphic>
-                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                <image><Image url="@../img/icon_gear.png" /></image>
-                            </ImageView>
+                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                         </graphic>
                     </Button>
-                    <Label style="-fx-font-size: 10px;" styleClass="bottom-label" text="CÀI ĐẶT" />
+                    <Label style="-fx-font-size: 10px;" styleClass="bottom-label" text="Cài đặt" />
                 </VBox>
 
                 <HBox spacing="20.0">
                     <VBox alignment="CENTER" spacing="3.0">
-                        <Button fx:id="restartButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="40.0" styleClass="circular-btn-gold">
+                        <Button fx:id="restartButton" mnemonicParsing="false" onAction="#onRestart" prefHeight="60.0" prefWidth="40.0" styleClass="circular-btn-gold">
                             <graphic>
-                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                    <image><Image url="@../img/icon_restart.png" /></image>
-                                </ImageView>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                             </graphic>
                         </Button>
-                        <Label style="-fx-font-size: 10px;" styleClass="bottom-label" text="RESTART" />
+                        <Label style="-fx-font-size: 10px;" styleClass="bottom-label" text="Bắt đầu lại" />
                     </VBox>
 
                     <VBox alignment="CENTER" spacing="3.0">
-                        <Button fx:id="undoButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="40.0" styleClass="circular-btn-gold">
+                        <Button fx:id="undoButton" mnemonicParsing="false" onAction="#onBack" prefHeight="60.0" prefWidth="40.0" styleClass="circular-btn-gold">
                             <graphic>
-                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                    <image><Image url="@../img/icon_undo.png" /></image>
-                                </ImageView>
+                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                             </graphic>
                         </Button>
-                        <Label style="-fx-font-size: 10px;" styleClass="bottom-label" text="UNDO" />
+                        <Label style="-fx-font-size: 10px;" styleClass="bottom-label" text="Quay về" />
                     </VBox>
                 </HBox>
 
                 <VBox alignment="CENTER" spacing="3.0">
                     <Button fx:id="hintButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="40.0" styleClass="circular-btn-gold">
                         <graphic>
-                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                <image><Image url="@../img/icon_hint.png" /></image>
-                            </ImageView>
+                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                         </graphic>
                     </Button>
-                    <Label style="-fx-font-size: 10px;" styleClass="bottom-label" text="HINT" />
+                    <Label style="-fx-font-size: 10px;" styleClass="bottom-label" text="Gợi ý" />
                 </VBox>
             </children>
         </HBox>

@@ -14,7 +14,7 @@ public class Game {
         this.board = new Board();
         this.blackPlayer = black;
         this.whitePlayer = white;
-        this.currentPlayer = black; // Theo luật, Đen luôn đi trước
+        this.currentPlayer = black;
         this.isGameOver = false;
     }
     public Board getBoard() {
@@ -44,9 +44,45 @@ public class Game {
     }
     public List<Move> getValidMovesCurrentPlayer() {
         if (isGameOver()) {
-            return new ArrayList<>(); // Trả về danh sách rỗng nếu game kết thúc
+            return new ArrayList<>();
         }
         return board.getValidMoves(currentPlayer.getPieceColor());
     }
+    public boolean playTurn(int row, int col) {
+        if (isGameOver) return false;
 
+        List<Move> validMoves = board.getValidMoves(currentPlayer.getPieceColor());
+        Move moveToMake = null;
+        for (Move m : validMoves) {
+            if (m.getRow() == row && m.getCol() == col) {
+                moveToMake = m;
+                break;
+            }
+        }
+
+        if (moveToMake == null) {
+            return false;
+        }
+
+        board.makeMove(moveToMake, currentPlayer.getPieceColor());
+
+        nextTurn();
+        return true;
+    }
+    public void nextTurn() {
+        switchPlayer();
+
+        if (board.getValidMoves(currentPlayer.getPieceColor()).isEmpty()) {
+            System.out.println(currentPlayer.getPieceColor() + " không có nước đi. Chuyển lượt lại.");
+            switchPlayer();
+
+            if (board.getValidMoves(currentPlayer.getPieceColor()).isEmpty()) {
+                isGameOver = true;
+                System.out.println("GAME OVER!");
+            }
+        }
+    }
+    public int getScore(Piece color) {
+        return board.getScore().get(color);
+    }
 }

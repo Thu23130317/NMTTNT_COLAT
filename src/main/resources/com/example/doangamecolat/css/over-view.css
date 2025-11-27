@@ -7,49 +7,35 @@
     -fx-font-weight: bold;
     -fx-font-size: 45px; /* Tăng size lên cho hoành tráng */
     -fx-effect: dropshadow(one-pass-box, black, 3, 0.5, 0, 0);
-    /* Màu chữ sẽ được set Dynamic trong Controller */
 }
-
-/* Khung gỗ chính chứa nội dung */
 .wood-frame {
-    /* Tạo nền gỗ bằng gradient nâu đậm */
     -fx-background-color: linear-gradient(to bottom, #4e342e, #2d1e1a);
     -fx-background-radius: 20;
-
-    /* Viền vàng trang trí công phu */
     -fx-border-color: linear-gradient(to right, #bf953f, #fcf6ba, #bf953f);
     -fx-border-width: 5px;
     -fx-border-radius: 18;
-
-    /* Đổ bóng khung */
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 10);
 }
 
-/* Chữ VICTORY */
 .victory-text {
-    -fx-font-family: "System"; /* Nên dùng font game fantasy nếu có */
+    -fx-font-family: "System";
     -fx-font-weight: bold;
     -fx-font-size: 60px;
-    /* Gradient vàng kim loại cho chữ */
     -fx-fill: linear-gradient(to bottom, #FFD700 0%, #FF8C00 100%);
     -fx-stroke: #3e2723;
     -fx-stroke-width: 2px;
 }
 
-/* Vòng tròn điểm - Người thắng (Hiệu ứng lửa/vàng sáng rực) */
 .score-circle-winner {
     -fx-border-color: #FFD700;
     -fx-border-width: 4px;
     -fx-border-radius: 50%;
     -fx-background-radius: 50%;
-    /* Nền bên trong vòng tròn */
     -fx-background-color: radial-gradient(center 50% 50%, radius 50%, rgba(255, 69, 0, 0.3), transparent);
 
-    /* Hiệu ứng phát sáng rực rỡ */
     -fx-effect: dropshadow(gaussian, #FFA500, 20, 0.6, 0, 0);
 }
 
-/* Vòng tròn điểm - Người thua (Bạc/Đồng tối hơn) */
 .score-circle-loser {
     -fx-border-color: #A9A9A9; /* Màu bạc xám */
     -fx-border-width: 3px;
@@ -58,7 +44,6 @@
     -fx-background-color: rgba(0,0,0,0.2);
 }
 
-/* Số điểm */
 .score-number {
     -fx-text-fill: #FFF8E1;
     -fx-font-size: 40px;
@@ -66,7 +51,6 @@
     -fx-effect: dropshadow(one-pass-box, black, 2, 0, 1, 1);
 }
 
-/* Quân cờ trang trí */
 .disc-black {
     -fx-fill: linear-gradient(to bottom right, #444, #000);
     -fx-stroke: #555;
@@ -75,7 +59,6 @@
     -fx-fill: linear-gradient(to bottom right, #fff, #ccc);
     -fx-stroke: #999;
 }
-/* Text điểm số */
 .score-number-gold {
     -fx-text-fill: #FFD700;
     -fx-font-size: 40px;
@@ -88,21 +71,18 @@
     -fx-font-weight: bold;
     -fx-effect: dropshadow(two-pass-box, black, 5, 0, 0, 2);
 }
-/* --- NÚT BẤM HÌNH LỤC GIÁC (GEM BUTTONS) --- */
 .btn-gem-green, .btn-gem-brown {
-    -fx-background-radius: 0; /* Tắt bo tròn mặc định để dùng hình dạng SVG */
+    -fx-background-radius: 0;
     -fx-background-insets: 0;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 16px;
     -fx-cursor: hand;
-    /* Tạo hình lục giác vát cạnh bằng SVG Path */
     -fx-shape: "M 20 0 L 180 0 L 200 30 L 180 60 L 20 60 L 0 30 Z";
     -fx-min-width: 200px;
     -fx-min-height: 60px;
 }
 
-/* Nút Xanh (Play Again) */
 .btn-gem-green {
     -fx-background-color: linear-gradient(to bottom, #8BC34A 0%, #33691E 100%);
     -fx-border-color: #FFD700;
@@ -113,7 +93,6 @@
     -fx-effect: dropshadow(gaussian, #FFD700, 15, 0.5, 0, 0);
 }
 
-/* Nút Nâu (Menu) */
 .btn-gem-brown {
     -fx-background-color: linear-gradient(to bottom, #8D6E63 0%, #3E2723 100%);
     -fx-border-color: #FFD700;
