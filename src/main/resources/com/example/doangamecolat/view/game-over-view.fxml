@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<StackPane styleClass="root-pane" stylesheets="/com/example/doangamecolat/css/over-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.GameOverController">
+<StackPane styleClass="root-pane" stylesheets="/com/example/doangamecolat/css/over-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.GameOverController">
     <children>
         <StackPane>
             <children>

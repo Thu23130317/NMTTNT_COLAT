@@ -26,6 +26,18 @@ public class Board {
         grid[4][3] = Piece.BLACK;
         grid[4][4] = Piece.WHITE;
     }
+    public Board getCopy() {
+        Board newBoard = new Board();
+
+
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                newBoard.grid[i][j] = this.grid[i][j];
+            }
+        }
+        return newBoard;
+    }
+
     public Piece getPiece(int row, int col) {
         if (!isPieceInChessboard(row, col)) {
             return null;

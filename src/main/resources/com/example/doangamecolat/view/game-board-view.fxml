@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<BorderPane maxWidth="1024.0" prefHeight="400.0" styleClass="game-background" stylesheets="/com/example/doangamecolat/css/board-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.GameBoardController">
+<BorderPane maxWidth="1024.0" prefHeight="400.0" styleClass="game-background" stylesheets="/com/example/doangamecolat/css/board-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.GameBoardController">
 
     <top>
         <StackPane BorderPane.alignment="CENTER">

@@ -84,15 +84,12 @@
 /* Khung gỗ bên ngoài (Dùng CSS giả lập nếu chưa có ảnh) */
 .wood-board-frame-outer {
     /* Giả lập vân gỗ và viền vàng 3D */
-    -fx-background-color:
-            linear-gradient(to bottom, #8d6e63 0%, #4e342e 100%), /* Màu nền gỗ tối */
-            repeating-linear-gradient(45deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 2px, transparent 2px, transparent 4px); /* Vân gỗ */
 
     -fx-background-radius: 30px;
     /* Viền vàng dày, phức tạp */
     -fx-border-color:
-            linear-gradient(to bottom, #ffd700 0%, #b8860b 100%), /* Viền ngoài */
-            linear-gradient(to bottom, #5d4037 0%, #3e2723 100%); /* Viền trong tạo độ sâu */
+            linear-gradient(to bottom, #ffd700, #b8860b),
+            linear-gradient(to bottom, #5d4037, #3e2723);
     -fx-border-width: 8px, 4px;
     -fx-border-insets: 0px, 8px;
     -fx-border-radius: 30px, 22px;
@@ -110,7 +107,7 @@
     -fx-background-color: #6d4c41;
     -fx-background-radius: 10px;
     /* Hiệu ứng khắc chìm */
-    -fx-effect: rgba(0,0,0,0.6);
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.6), 8, 0.7, 0, 2);
     -fx-border-color: #3e2723;
     -fx-border-width: 2px;
 }
@@ -160,9 +157,10 @@
 .rune-hint-glow {
     /* CSS không thể vẽ rune, bạn cần ảnh. Đây là hiệu ứng cho ảnh đó */
     -fx-effect:
-            glow(0.8),
-            dropshadow(gaussian, #ff4500, 15, 0.7, 0, 0);
+            dropshadow(gaussian, rgba(255, 255, 255, 0.8), 20, 0.9, 0, 0), /* Glow giả */
+            dropshadow(gaussian, #ff4500, 15, 0.7, 0, 0); /* Viền cam rực */
 }
+
 
 
 /* ================= BOTTOM BAR STYLES ================= */
