@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleButton; // Đổi từ RadioButton sang ToggleButton
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -17,58 +17,75 @@ import java.io.IOException;
 public class SettingsController {
 
     @FXML
-    private ToggleGroup modeGroup;
+    private ToggleGroup modeGroup; // Cần khai báo trong FXML
     @FXML
-    private RadioButton pvpButton;
+    private ToggleButton pvpButton; // Cần thêm nút này trong FXML
     @FXML
-    private RadioButton pveButton;
+    private ToggleButton pveButton;
+
     @FXML
     private VBox difficultyBox;
     @FXML
     private ToggleGroup difficultyGroup;
+
     @FXML
-    private RadioButton easyButton;
+    private ToggleButton easyButton;   // Đổi thành ToggleButton
     @FXML
-    private RadioButton mediumButton;
+    private ToggleButton mediumButton; // Đổi thành ToggleButton
     @FXML
-    private RadioButton hardButton;
+    private ToggleButton hardButton;   // Đổi thành ToggleButton
 
     @FXML
     public void initialize() {
-        pveButton.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
-            difficultyBox.setVisible(isSelected);
-        });
+        // Logic: Nếu chọn PvE thì hiện hộp chọn độ khó, nếu PvP thì ẩn đi
+        if (modeGroup != null) {
+            modeGroup.selectedToggleProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal == pveButton) {
+                    difficultyBox.setVisible(true);
+                } else {
+                    difficultyBox.setVisible(false);
+                }
+            });
+        }
     }
 
     @FXML
     private void onStartButtonPress(ActionEvent event) throws IOException {
         Player blackPlayer;
         Player whitePlayer;
-        int maxDepth = 4;
-        if (easyButton.isSelected()) {
-            maxDepth = 2;
-        } else if (hardButton.isSelected()) {
-            maxDepth = 6;
+
+        // 1. Kiểm tra chế độ chơi
+        if (pveButton.isSelected()) {
+            // --- CHẾ ĐỘ PVE ---
+            int maxDepth = 4; // Mặc định là Thường
+            if (easyButton.isSelected()) maxDepth = 2;
+            else if (hardButton.isSelected()) maxDepth = 6;
+
+            blackPlayer = new HumanPlayer(Piece.BLACK);
+            whitePlayer = new AIPlayer(Piece.WHITE, maxDepth);
+        } else {
+            // --- CHẾ ĐỘ PVP (Người đấu Người) ---
+            blackPlayer = new HumanPlayer(Piece.BLACK);
+            whitePlayer = new HumanPlayer(Piece.WHITE);
         }
-
-        // Người chơi là ĐEN, AI là TRẮNG
-        blackPlayer = new HumanPlayer(Piece.BLACK);
-        whitePlayer = new AIPlayer(Piece.WHITE, maxDepth);
-        // TODO: Có thể thêm lựa chọn cho phép người chơi chọn quân TRẮNG
-
 
         // 2. Tải màn hình bàn cờ
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/doangamecolat/view/game-board-view.fxml"));
         Parent gameBoardRoot = loader.load();
 
-        // 3. Lấy GameBoardController và truyền dữ liệu người chơi qua
+        // 3. Truyền dữ liệu sang GameBoardController
         GameBoardController gameBoardController = loader.getController();
-//        gameBoardController.initGame(blackPlayer, whitePlayer); // <-- Phương thức này cần được TẠO MỚI
+
+        // QUAN TRỌNG: Bạn cần bỏ comment dòng này và đảm bảo bên GameBoardController đã có hàm initGame
+        if (gameBoardController != null) {
+            gameBoardController.initGame(blackPlayer, whitePlayer);
+        }
 
         // 4. Chuyển Scene
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(gameBoardRoot));
-        stage.setTitle("Game Cờ Lật");
+        stage.setTitle("Game Cờ Lật - Đang chơi");
+        stage.centerOnScreen();
     }
 
     @FXML

@@ -1,0 +1,40 @@
+/* Định dạng chung cho nút menu */
+.menu-button {
+    -fx-background-color:
+        /* Lớp phủ bóng (tạo độ nổi) */
+            linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%),
+                /* Lớp màu gỗ (Nâu đậm sang nâu nhạt) */
+            linear-gradient(to bottom, #5D4037, #3E2723);
+
+    -fx-background-radius: 15; /* Bo tròn góc */
+    -fx-background-insets: 0, 1;
+
+    /* Viền vàng */
+    -fx-border-color: #FFD700;
+    -fx-border-width: 2px;
+    -fx-border-radius: 15;
+
+    /* Hiệu ứng đổ bóng phát sáng màu cam/vàng */
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.6), 10, 0, 0, 0);
+
+    /* Định dạng chữ */
+    -fx-text-fill: #FFD700; /* Chữ màu vàng kim */
+    -fx-font-family: "Segoe UI", sans-serif; /* Hoặc font game của bạn */
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-cursor: hand;
+}
+
+/* Hiệu ứng khi di chuột vào (Sáng lên) */
+.menu-button:hover {
+    -fx-background-color:
+            linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0.1) 100%),
+            linear-gradient(to bottom, #6D4C41, #4E342E); /* Màu gỗ sáng hơn chút */
+    -fx-effect: dropshadow(three-pass-box, #FFD700, 15, 0.3, 0, 0); /* Phát sáng mạnh hơn */
+}
+
+/* Hiệu ứng khi nhấn chuột (Lún xuống) */
+.menu-button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #3E2723, #5D4037);
+    -fx-translate-y: 2; /* Dịch chuyển nút xuống 2px */
+}

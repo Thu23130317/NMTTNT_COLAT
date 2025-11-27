@@ -3,72 +3,83 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" styleClass="settings-root" stylesheets="/com/example/doangamecolat/css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.SettingsController">
+<StackPane styleClass="root-pane" stylesheets="@../css/setting-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.SettingsController">
     <children>
-        <Label styleClass="settings-title" text="CHỌN CHẾ ĐỘ CHƠI">
-            <font>
-                <Font name="System Bold" size="28.0" />
-            </font>
-        </Label>
+        <ImageView fitHeight="500.0" fitWidth="1024.0" pickOnBounds="true" preserveRatio="false">
+            <image>
+                <Image url="@../img/bancosetting.png" />
+            </image>
+        </ImageView>
 
-        <VBox alignment="CENTER_LEFT" maxWidth="300.0" spacing="10.0">
+        <StackPane style="-fx-background-color: rgba(0, 0, 0, 0.6);" />
+
+        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="15.0" styleClass="paper-panel">
             <children>
-                <Label text="Chế độ chơi:">
+                <Label styleClass="settings-title" text="CÀI ĐẶT TRẬN ĐẤU" textFill="#3e2723">
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
                     <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="24.0" />
                     </font>
                 </Label>
-                <fx:define>
-                </fx:define>
-                <RadioButton fx:id="pveButton" mnemonicParsing="false" text="Người vs Máy">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-               <toggleGroup>
-               </toggleGroup>
-                </RadioButton>
-            </children>
-        </VBox>
 
-        <VBox fx:id="difficultyBox" alignment="CENTER_LEFT" maxWidth="300.0" spacing="10.0" visible="false">
-            <children>
-                <Label text="Độ khó AI:">
-                    <font>
-                        <Font name="System Bold" size="18.0" />
-                    </font>
-                </Label>
-                <fx:define>
-                </fx:define>
-                <RadioButton fx:id="easyButton" mnemonicParsing="false" text="Dễ (Depth 2)">
-                    <font><Font size="16.0" /></font>
-               <toggleGroup>
-               </toggleGroup>
-                </RadioButton>
-                <RadioButton fx:id="mediumButton" mnemonicParsing="false" selected="true" text="Trung bình (Depth 4)" toggleGroup="$difficultyGroup">
-                    <font><Font size="16.0" /></font>
-                </RadioButton>
-                <RadioButton fx:id="hardButton" mnemonicParsing="false" text="Khó (Depth 6)" toggleGroup="$difficultyGroup">
-                    <font><Font size="16.0" /></font>
-                </RadioButton>
-            </children>
-        </VBox>
+                <VBox alignment="CENTER" spacing="10.0">
+                    <children>
+                        <Label styleClass="section-label" text="Chế độ chơi:" />
+                        <ToggleButton fx:id="pveButton" mnemonicParsing="false" selected="true" styleClass="game-mode-button" text="Người đấu với Máy (PvE)">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </ToggleButton>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </VBox>
 
-        <HBox alignment="CENTER" spacing="30.0">
-            <children>
-                <Button fx:id="startButton" mnemonicParsing="false" onAction="#onStartButtonPress" prefHeight="40.0" prefWidth="120.0" text="Bắt đầu" />
-                <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackBtn" prefHeight="40.0" prefWidth="120.0" styleClass="back-button" text="Quay lại Menu" />
+                <VBox fx:id="difficultyBox" alignment="CENTER" spacing="10.0">
+                    <children>
+                        <Label styleClass="section-label" text="Độ khó AI:" />
+                        <HBox alignment="CENTER" spacing="15.0">
+                            <children>
+                                <ToggleButton fx:id="easyButton" mnemonicParsing="false" styleClass="difficulty-button" text="Dễ&#10;(Tập sự)">
+                                    <toggleGroup>
+                                        <ToggleGroup fx:id="difficultyGroup" />
+                                    </toggleGroup>
+                                </ToggleButton>
+                                <ToggleButton fx:id="mediumButton" mnemonicParsing="false" selected="true" styleClass="difficulty-button" text="Thường&#10;(Chiến binh)" toggleGroup="$difficultyGroup" />
+                                <ToggleButton fx:id="hardButton" mnemonicParsing="false" styleClass="difficulty-button" text="Khó&#10;(Đại tướng)" toggleGroup="$difficultyGroup" />
+                            </children>
+                        </HBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="20.0" />
+                    </VBox.margin>
+                </VBox>
+
+                <HBox alignment="CENTER" spacing="40.0">
+                    <children>
+                        <Button fx:id="startButton" mnemonicParsing="false" onAction="#onStartButtonPress" prefHeight="50.0" prefWidth="160.0" styleClass="btn-gem-green" text="Bắt đầu" />
+                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackBtn" prefHeight="50.0" prefWidth="160.0" styleClass="btn-gem-brown" text="Quay lại" />
+                    </children>
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </HBox>
             </children>
-            <VBox.margin>
-                <Insets top="20.0" />
-            </VBox.margin>
-        </HBox>
+            <padding>
+                <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+            </padding>
+        </VBox>
     </children>
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-</VBox>
+</StackPane>
