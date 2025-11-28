@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane styleClass="root-pane" stylesheets="@../css/setting-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.SettingsController">
+<StackPane styleClass="root-pane" stylesheets="@../css/setting-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.SettingsController">
     <children>
         <ImageView fitHeight="500.0" fitWidth="1024.0" pickOnBounds="true" preserveRatio="false">
             <image>
@@ -36,11 +36,24 @@
                 <VBox alignment="CENTER" spacing="10.0">
                     <children>
                         <Label styleClass="section-label" text="Chế độ chơi:" />
-                        <ToggleButton fx:id="pveButton" mnemonicParsing="false" selected="true" styleClass="game-mode-button" text="Người đấu với Máy (PvE)">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </ToggleButton>
+                        <HBox alignment="CENTER" spacing="20.0">
+                            <children>
+                                <ToggleButton fx:id="pveButton" mnemonicParsing="false" selected="true" styleClass="game-mode-button" text="Đấu với Máy&#10;(PvE)">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <toggleGroup>
+                                        <ToggleGroup fx:id="modeGroup" />
+                                    </toggleGroup>
+                                </ToggleButton>
+
+                                <ToggleButton fx:id="pvpButton" mnemonicParsing="false" styleClass="game-mode-button" text="Đấu với Người&#10;(PvP)" toggleGroup="$modeGroup">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </ToggleButton>
+                            </children>
+                        </HBox>
                     </children>
                     <VBox.margin>
                         <Insets bottom="10.0" />

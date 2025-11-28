@@ -1,37 +1,29 @@
-/* Bảng nền giấy/gỗ cho phần cài đặt */
 .paper-panel {
-    /* Nền màu kem giấy cổ */
     -fx-background-color: linear-gradient(to bottom, #fff8e1, #ffecb3);
     -fx-background-radius: 20;
-
-    /* Viền vàng/nâu */
     -fx-border-color: #8d6e63;
     -fx-border-width: 4px;
     -fx-border-radius: 18;
 
-    /* Đổ bóng để bảng nổi lên trên nền */
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 30, 0, 0, 10);
 }
 
-/* Tiêu đề */
 .settings-title {
-    -fx-text-fill: #3e2723; /* Màu nâu đậm */
+    -fx-text-fill: #3e2723;
     -fx-font-family: "Segoe UI", sans-serif;
     -fx-font-weight: bold;
     -fx-font-size: 28px;
     -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.3), 0, 0, 0, 2);
 }
 
-/* Nhãn mục nhỏ */
 .section-label {
     -fx-text-fill: #5d4037;
     -fx-font-weight: bold;
     -fx-font-size: 16px;
 }
 
-/* Nút chọn độ khó (Toggle Button) */
 .difficulty-button {
-    -fx-background-color: #d7ccc8; /* Nâu nhạt */
+    -fx-background-color: #d7ccc8;
     -fx-text-fill: #3e2723;
     -fx-background-radius: 10;
     -fx-cursor: hand;
@@ -41,14 +33,13 @@
 }
 
 .difficulty-button:selected {
-    -fx-background-color: #8d6e63; /* Nâu đậm khi chọn */
+    -fx-background-color: #8d6e63;
     -fx-text-fill: white;
-    -fx-effect: rgba(0,0,0,0.5);
+    -fx-effect: dropshadow(three-pass-box, #FFD700, 10, 0.5, 0, 0);
     -fx-font-weight: bold;
     -fx-border-color: #3e2723;
 }
 
-/* Dùng lại nút Gem ở màn hình Victory */
 .btn-gem-green {
     -fx-background-color: linear-gradient(to bottom, #8BC34A 0%, #33691E 100%);
     -fx-border-color: #FFD700;
@@ -59,7 +50,6 @@
     -fx-effect: dropshadow(gaussian, #FFD700, 15, 0.5, 0, 0);
 }
 
-/* Nút Nâu (Menu) */
 .btn-gem-brown {
     -fx-background-color: linear-gradient(to bottom, #8D6E63 0%, #3E2723 100%);
     -fx-border-color: #FFD700;

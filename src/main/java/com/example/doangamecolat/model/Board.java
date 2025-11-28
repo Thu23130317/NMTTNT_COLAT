@@ -8,7 +8,6 @@ import java.util.Map;
 public class Board {
     public static final int SIZE = 8;
     private Piece[][] grid;
-    // 8 hướng di chuyển (ngang, dọc, chéo)
     private static final int[][] DIRECTIONS = {
             {0, 1}, {1, 0}, {0, -1}, {-1, 0},
             {1, 1}, {1, -1}, {-1, 1}, {-1, -1}
@@ -26,6 +25,18 @@ public class Board {
         grid[4][3] = Piece.BLACK;
         grid[4][4] = Piece.WHITE;
     }
+    public Board getCopy() {
+        Board newBoard = new Board();
+
+
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                newBoard.grid[i][j] = this.grid[i][j];
+            }
+        }
+        return newBoard;
+    }
+
     public Piece getPiece(int row, int col) {
         if (!isPieceInChessboard(row, col)) {
             return null;
