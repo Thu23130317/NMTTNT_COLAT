@@ -71,7 +71,6 @@ public class Game {
     }
     public void nextTurn() {
         switchPlayer();
-
         if (board.getValidMoves(currentPlayer.getPieceColor()).isEmpty()) {
             System.out.println(currentPlayer.getPieceColor() + " không có nước đi. Chuyển lượt lại.");
             switchPlayer();

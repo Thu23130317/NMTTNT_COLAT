@@ -58,7 +58,7 @@ public class GameBoardController implements Initializable{
         this.game = new Game(blackPlayer, whitePlayer);
 
         updateUI();
-        checkAIKhaiCuoc();
+        AIMove();
     }
 
     private void handleCellClick(int row, int col) {
@@ -68,7 +68,7 @@ public class GameBoardController implements Initializable{
         boolean success = game.playTurn(row, col);
         if (success) {
             updateUI();
-            checkAIKhaiCuoc();
+            AIMove();
         } else {
             System.out.println("Nước đi không hợp lệ!");
         }
@@ -120,7 +120,7 @@ public class GameBoardController implements Initializable{
         }
     }
 
-    private void checkAIKhaiCuoc() {
+    private void AIMove() {
             System.out.println("AI đang suy nghĩ...");
     }
 
