@@ -19,6 +19,6 @@ public class AIPlayer extends Player {
     }
 
     private Move findBestMove(Board board, Piece color) {
-        return MiniMax.findBestMove(board, this.pieceColor, this.maxDepth);
+        return null;
     }
 }

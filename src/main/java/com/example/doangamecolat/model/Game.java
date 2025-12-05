@@ -42,12 +42,6 @@ public class Game {
             currentPlayer = blackPlayer;
         }
     }
-    public List<Move> getValidMovesCurrentPlayer() {
-        if (isGameOver()) {
-            return new ArrayList<>();
-        }
-        return board.getValidMoves(currentPlayer.getPieceColor());
-    }
     public boolean playTurn(int row, int col) {
         if (isGameOver) return false;
 
