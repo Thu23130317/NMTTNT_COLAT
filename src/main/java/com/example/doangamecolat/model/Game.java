@@ -43,12 +43,6 @@ public class Game {
             currentPlayer = blackPlayer;
         }
     }
-    public List<Move> getValidMovesCurrentPlayer() {
-        if (isGameOver()) {
-            return new ArrayList<>();
-        }
-        return board.getValidMoves(currentPlayer.getPieceColor());
-    }
     public boolean playTurn(int row, int col) {
         if (isGameOver) return false;
 
@@ -72,7 +66,6 @@ public class Game {
     }
     public void nextTurn() {
         switchPlayer();
-
         if (board.getValidMoves(currentPlayer.getPieceColor()).isEmpty()) {
             System.out.println(currentPlayer.getPieceColor() + " không có nước đi. Chuyển lượt lại.");
             switchPlayer();

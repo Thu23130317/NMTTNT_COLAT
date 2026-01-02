@@ -8,6 +8,7 @@ import java.util.Map;
 public class Board {
     public static final int SIZE = 8;
     private Piece[][] grid;
+
     private static final int[][] DIRECTIONS = {
             {0, 1}, {1, 0}, {0, -1}, {-1, 0},
             {1, 1}, {1, -1}, {-1, 1}, {-1, -1}
@@ -25,10 +26,9 @@ public class Board {
         grid[4][3] = Piece.BLACK;
         grid[4][4] = Piece.WHITE;
     }
+
     public Board getCopy() {
         Board newBoard = new Board();
-
-
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 newBoard.grid[i][j] = this.grid[i][j];
@@ -43,6 +43,7 @@ public class Board {
         }
         return grid[row][col];
     }
+
     private boolean isPieceInChessboard(int row, int col) {
         return row >= 0 && row < SIZE && col >= 0 && col < SIZE;
     }
@@ -81,7 +82,6 @@ public class Board {
                         cc += dc;
                     }
                 }
-
                 if (!flippedByThisMove.isEmpty()) {
                     validMoves.add(new Move(r, c, flippedByThisMove));
                 }
@@ -89,9 +89,9 @@ public class Board {
         }
         return validMoves;
     }
+
     public void makeMove(Move move, Piece playerColor) {
         grid[move.getRow()][move.getCol()] = playerColor;
-
         for (int[] pos : move.getFlippedDiscs()) {
             grid[pos[0]][pos[1]] = playerColor;
         }
