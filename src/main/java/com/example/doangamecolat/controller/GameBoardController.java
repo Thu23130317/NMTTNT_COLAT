@@ -23,7 +23,6 @@ public class GameBoardController implements Initializable{
     @FXML private GridPane boardGrid;
     @FXML private Label blackScoreLabel;
     @FXML private Label whiteScoreLabel;
-    @FXML private Label currentPlayerLabel;
 
     @FXML
     private void onBack(ActionEvent event) throws IOException {
@@ -46,6 +45,7 @@ public class GameBoardController implements Initializable{
     private Game game;
     private Player blackPlayer;
     private Player whitePlayer;
+    private boolean isRunningAi = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -58,19 +58,51 @@ public class GameBoardController implements Initializable{
         this.game = new Game(blackPlayer, whitePlayer);
 
         updateUI();
-        checkAIKhaiCuoc();
+        processAiTurn();
     }
 
+
     private void handleCellClick(int row, int col) {
-        if (game.isGameOver() || (game.getCurrentPlayer() instanceof AIPlayer)) {
-            return;
+        // Nếu game kết thúc hoặc AI đang chạy loop thì không nhận click
+        if (game.isGameOver() || isRunningAi) return;
+
+        // 1. Người chơi đánh
+        if (game.getCurrentPlayer() instanceof HumanPlayer) {
+            boolean success = game.playTurn(row, col);
+            if (success) {
+                updateUI();
+
+                // 2. Sau khi người đánh xong, gọi hàm xử lý AI
+                processAiTurn();
+            }
         }
-        boolean success = game.playTurn(row, col);
-        if (success) {
-            updateUI();
-            checkAIKhaiCuoc();
-        } else {
-            System.out.println("Nước đi không hợp lệ!");
+    }
+    // Hàm xử lý logic AI (chạy trên Main Thread - sẽ làm đông cứng màn hình khi suy nghĩ)
+    private void processAiTurn() {
+        // Kiểm tra xem có phải lượt AI không
+        if (!game.isGameOver() && game.getCurrentPlayer() instanceof AIPlayer) {
+            isRunningAi = true; // Bật cờ để chặn click chuột lung tung
+
+            // Dùng vòng lặp while để xử lý trường hợp AI đánh liên tiếp (nếu người bị mất lượt)
+            while (!game.isGameOver() && game.getCurrentPlayer() instanceof AIPlayer) {
+                System.out.println("AI (" + game.getCurrentPlayer().getPieceColor() + ") đang tính toán...");
+
+                // ⚠️ Dòng này sẽ làm treo giao diện cho đến khi tính xong (do chọn đơn luồng)
+                Move aiMove = game.getCurrentPlayer().getMove(game.getBoard());
+
+                if (aiMove != null) {
+                    game.playTurn(aiMove.getRow(), aiMove.getCol());
+                    System.out.println("AI đánh: " + aiMove);
+                } else {
+                    System.out.println("AI không có nước đi -> Pass lượt.");
+                    game.nextTurn();
+                }
+
+                // Cập nhật điểm và bàn cờ sau mỗi nước đi của AI
+                updateUI();
+            }
+
+            isRunningAi = false; // Tắt cờ, trả lại quyền điều khiển cho người
         }
     }
 
@@ -120,9 +152,11 @@ public class GameBoardController implements Initializable{
         }
     }
 
-    private void checkAIKhaiCuoc() {
-            System.out.println("AI đang suy nghĩ...");
-    }
+//    private void checkAiTurn() {
+//        if (game.isGameOver()) return;
+//    }
+
+
 
     private void createBoardGrid() {
         boardGrid.getChildren().clear();
