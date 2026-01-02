@@ -1,7 +1,6 @@
 package com.example.doangamecolat.model;
 
-import com.example.doangamecolat.ai.Heuristic;
-import com.example.doangamecolat.ai.MiniMax;
+import com.example.doangamecolat.ai.MiniMax; // Nhớ import class MiniMax
 
 import java.util.List;
 
@@ -15,10 +14,15 @@ public class AIPlayer extends Player {
 
     @Override
     public Move getMove(Board board) {
-        return findBestMove(board, this.pieceColor);
-    }
+        // Nếu độ sâu là 0 hoặc 1 (Mức siêu dễ), đánh random cho vui
+        if (this.maxDepth <= 1) {
+            List<Move> moves = board.getValidMoves(this.pieceColor);
+            if (moves.isEmpty()) return null;
+            // Chọn bừa một nước
+            return moves.get((int) (Math.random() * moves.size()));
+        }
 
-    private Move findBestMove(Board board, Piece color) {
-        return null;
+        // Các mức khó hơn thì dùng não (Minimax)
+        return MiniMax.findBestMove(board, this.pieceColor, this.maxDepth);
     }
 }

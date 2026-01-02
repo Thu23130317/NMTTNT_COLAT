@@ -35,7 +35,8 @@ public class Game {
         }
         return false;
     }
-    private void switchPlayer() {
+
+    public void switchPlayer() {
         if (currentPlayer == blackPlayer) {
             currentPlayer = whitePlayer;
         } else {
@@ -78,4 +79,5 @@ public class Game {
     public int getScore(Piece color) {
         return board.getScore().get(color);
     }
+
 }

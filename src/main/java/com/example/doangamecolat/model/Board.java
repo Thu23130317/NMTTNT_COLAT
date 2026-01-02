@@ -110,4 +110,8 @@ public class Board {
         }
         return scores;
     }
+    public boolean isGameOver() {
+        return getValidMoves(Piece.BLACK).isEmpty()
+                && getValidMoves(Piece.WHITE).isEmpty();
+    }
 }
