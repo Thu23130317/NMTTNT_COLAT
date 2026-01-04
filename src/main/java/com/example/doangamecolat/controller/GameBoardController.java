@@ -2,9 +2,13 @@ package com.example.doangamecolat.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
+import com.example.doangamecolat.animation.PieceAnimation;
+import com.example.doangamecolat.audio.SoundManager;
 import com.example.doangamecolat.model.AIPlayer;
 import com.example.doangamecolat.model.Board;
 import com.example.doangamecolat.model.Game;
@@ -12,17 +16,24 @@ import com.example.doangamecolat.model.HumanPlayer;
 import com.example.doangamecolat.model.Move;
 import com.example.doangamecolat.model.Piece;
 import com.example.doangamecolat.model.Player;
+import com.example.doangamecolat.settings.SettingsManager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -56,6 +67,52 @@ public class GameBoardController implements Initializable{
         }
     }
     
+    @FXML
+    private void onSettingsButton(ActionEvent event) {
+        showSettingsDialog();
+    }
+    
+    private void showSettingsDialog() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Cài đặt");
+        dialog.setHeaderText("Âm thanh");
+        
+        // Tạo nội dung dialog
+        VBox content = new VBox(15);
+        content.setAlignment(Pos.CENTER);
+        content.setPadding(new Insets(20));
+        
+        SettingsManager settingsManager = SettingsManager.getInstance();
+        SoundManager soundManager = SoundManager.getInstance();
+        
+        // Toggle hiệu ứng âm thanh
+        ToggleButton soundEffectsToggle = new ToggleButton("🔊 Hiệu ứng âm thanh");
+        soundEffectsToggle.setSelected(settingsManager.isSoundEffectsEnabled());
+        soundEffectsToggle.setPrefWidth(200);
+        soundEffectsToggle.setStyle("-fx-font-size: 14px;");
+        soundEffectsToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            settingsManager.setSoundEffectsEnabled(newVal);
+            soundManager.setSoundEffectsEnabled(newVal);
+        });
+        
+        // Toggle nhạc nền
+        ToggleButton musicToggle = new ToggleButton("🎵 Nhạc nền");
+        musicToggle.setSelected(settingsManager.isMusicEnabled());
+        musicToggle.setPrefWidth(200);
+        musicToggle.setStyle("-fx-font-size: 14px;");
+        musicToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            settingsManager.setMusicEnabled(newVal);
+            soundManager.setMusicEnabled(newVal);
+        });
+        
+        content.getChildren().addAll(soundEffectsToggle, musicToggle);
+        
+        dialog.getDialogPane().setContent(content);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+        
+        dialog.showAndWait();
+    }
+    
     private void switchScene(ActionEvent event, String fxmlPath, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent root = loader.load();
@@ -71,6 +128,7 @@ public class GameBoardController implements Initializable{
     private Player whitePlayer;
     private boolean isRunningAi = false;
     private int undoCount = 0; // Đếm số lần dùng undo
+    private Map<String, Piece> previousBoardState = new HashMap<>(); // Lưu trạng thái board trước đó
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -181,21 +239,84 @@ public class GameBoardController implements Initializable{
 
     private void renderBoard() {
         Board board = game.getBoard();
+        boolean hasNewPiece = false;
+        int flipCount = 0;
+        
         for (int r = 0; r < Board.SIZE; r++) {
             for (int c = 0; c < Board.SIZE; c++) {
                 StackPane cell = getCellPane(r, c);
                 if (cell == null) continue;
 
-                if (cell.getChildren().size() > 1) {
-                    cell.getChildren().remove(1);
+                String key = r + "," + c;
+                Piece previousPiece = previousBoardState.get(key);
+                Piece currentPiece = board.getPiece(r, c);
+
+                // Kiểm tra nếu có quân mới được đặt
+                if (currentPiece != Piece.EMPTY && (previousPiece == null || previousPiece == Piece.EMPTY)) {
+                    hasNewPiece = true;
+                }
+                
+                // Đếm số quân bị lật
+                if (previousPiece != null && previousPiece != Piece.EMPTY && previousPiece != currentPiece && currentPiece != Piece.EMPTY) {
+                    flipCount++;
+                }
+            }
+        }
+        
+        // Phát âm thanh đặt cờ TRƯỚC (nếu có)
+        if (hasNewPiece) {
+            SoundManager.getInstance().playPlacePieceSound();
+        }
+        
+        // Render lại board và phát âm thanh lật
+        for (int r = 0; r < Board.SIZE; r++) {
+            for (int c = 0; c < Board.SIZE; c++) {
+                StackPane cell = getCellPane(r, c);
+                if (cell == null) continue;
+
+                String key = r + "," + c;
+                Piece previousPiece = previousBoardState.get(key);
+                Piece currentPiece = board.getPiece(r, c);
+
+                // Kiểm tra nếu quân cờ bị lật (đổi màu)
+                if (previousPiece != null && previousPiece != Piece.EMPTY && previousPiece != currentPiece && currentPiece != Piece.EMPTY) {
+                    // Quân cờ bị lật - giữ quân cũ và chạy animation
+                    if (cell.getChildren().size() > 1) {
+                        Circle oldPiece = (Circle) cell.getChildren().get(1);
+                        
+                        // Chạy animation lật và đổi màu giữa chừng
+                        PieceAnimation.flipWithColorChange(oldPiece, 
+                            currentPiece == Piece.BLACK ? "piece-black" : "piece-white",
+                            currentPiece == Piece.BLACK ? "piece-white" : "piece-black"
+                        );
+                    }
+                } else if (currentPiece != Piece.EMPTY && (previousPiece == null || previousPiece == Piece.EMPTY)) {
+                    // Quân cờ mới được đặt
+                    if (cell.getChildren().size() > 1) {
+                        cell.getChildren().remove(1);
+                    }
+                    Circle piece = new Circle(CELL_SIZE / 2 - 8);
+                    piece.getStyleClass().add(currentPiece == Piece.BLACK ? "piece-black" : "piece-white");
+                    cell.getChildren().add(piece);
+                    
+                    PieceAnimation.placeAnimation(piece);
+                } else if (currentPiece != Piece.EMPTY && previousPiece == currentPiece) {
+                    // Quân cờ không đổi - không làm gì
+                    if (cell.getChildren().size() == 1) {
+                        // Trường hợp khởi tạo lại board
+                        Circle piece = new Circle(CELL_SIZE / 2 - 8);
+                        piece.getStyleClass().add(currentPiece == Piece.BLACK ? "piece-black" : "piece-white");
+                        cell.getChildren().add(piece);
+                    }
+                } else if (currentPiece == Piece.EMPTY && previousPiece != Piece.EMPTY) {
+                    // Ô trống - xóa quân cờ
+                    if (cell.getChildren().size() > 1) {
+                        cell.getChildren().remove(1);
+                    }
                 }
 
-                Piece p = board.getPiece(r, c);
-                if (p != Piece.EMPTY) {
-                    Circle piece = new Circle(CELL_SIZE / 2 - 8);
-                    piece.getStyleClass().add(p == Piece.BLACK ? "piece-black" : "piece-white");
-                    cell.getChildren().add(piece);
-                }
+                // Cập nhật trạng thái
+                previousBoardState.put(key, currentPiece);
             }
         }
     }
