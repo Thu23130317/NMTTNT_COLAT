@@ -14,7 +14,7 @@
 
 <StackPane styleClass="root-pane" stylesheets="@../css/setting-view.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.SettingsController">
     <children>
-        <ImageView fitHeight="500.0" fitWidth="1024.0" pickOnBounds="true" preserveRatio="false">
+        <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="false">
             <image>
                 <Image url="@../img/bancosetting.png" />
             </image>
