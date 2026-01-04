@@ -44,7 +44,7 @@
                                     </ImageView>
                                 </StackPane>
                                 <VBox alignment="CENTER_LEFT" spacing="0.0">
-                                    <Label style="-fx-font-size: 12px;" styleClass="player-name-label" text="PLAYER (Black):" textFill="#ffeca0">
+                                    <Label style="-fx-font-size: 12px;" styleClass="player-name-label" text="NGƯỜI CHƠI (Đen):" textFill="#ffeca0">
                                     </Label>
                                     <StackPane styleClass="score-bar-glow">
                                         <Label fx:id="blackScoreLabel" styleClass="score-text" text="32" textFill="WHITE">
@@ -66,8 +66,8 @@
                                     </effect>
                                 </ImageView>
                                 <VBox alignment="CENTER" translateY="-2.0">
-                                    <Label style="-fx-font-size: 10px;" styleClass="turn-label-small" text="YOUR" textFill="#3e2723" />
-                                    <Label style="-fx-font-size: 14px;" styleClass="turn-label-large" text="TURN" textFill="#3e2723" />
+                                    <Label style="-fx-font-size: 10px;" styleClass="turn-label-small" text="LƯỢT" textFill="#3e2723" />
+                                    <Label style="-fx-font-size: 14px;" styleClass="turn-label-large" text="CỦA BẠN" textFill="#3e2723" />
                                 </VBox>
                             </children>
                         </StackPane>
@@ -75,7 +75,7 @@
                         <HBox alignment="CENTER_RIGHT" spacing="8.0" styleClass="player-panel">
                             <children>
                                 <VBox alignment="CENTER_RIGHT" spacing="0.0">
-                                    <Label style="-fx-font-size: 12px;" styleClass="player-name-label" text="AI (White):" textFill="#ffeca0" />
+                                    <Label style="-fx-font-size: 12px;" styleClass="player-name-label" text="MÁY (Trắng):" textFill="#ffeca0" />
                                     <StackPane styleClass="score-bar-glow">
                                         <Label fx:id="whiteScoreLabel" styleClass="score-text" text="28" textFill="WHITE">
                                             <effect><Glow level="0.9" /></effect>
@@ -129,48 +129,51 @@
     </center>
 
     <bottom>
-        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0" spacing="60.0" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="500.0" spacing="60.0" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="20.0" top="10.0" />
             </padding>
             <children>
-                <VBox alignment="CENTER" spacing="3.0">
-                    <Button fx:id="pauseButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="40.0" styleClass="circular-btn-gold">
+                <VBox alignment="CENTER" spacing="5.0">
+                    <Button fx:id="pauseButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="circular-btn-gold">
                         <graphic>
-                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../img/icon_gear.png" />
+                                </image>
+                            </ImageView>
                         </graphic>
                     </Button>
-                    <Label style="-fx-font-size: 10px;" styleClass="bottom-label" text="Cài đặt" />
+                    <Label style="-fx-font-size: 12px;" styleClass="bottom-label" text="Luật chơi" />
                 </VBox>
 
                 <HBox spacing="20.0">
-                    <VBox alignment="CENTER" spacing="3.0">
-                        <Button fx:id="restartButton" mnemonicParsing="false" onAction="#onRestart" prefHeight="60.0" prefWidth="40.0" styleClass="circular-btn-gold">
+                    <VBox alignment="CENTER" spacing="5.0">
+                        <Button fx:id="restartButton" mnemonicParsing="false" onAction="#onRestart" prefHeight="70.0" prefWidth="70.0" styleClass="circular-btn-gold">
                             <graphic>
-                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../img/icon_restart.png" />
+                                    </image>
+                                </ImageView>
                             </graphic>
                         </Button>
-                        <Label style="-fx-font-size: 10px;" styleClass="bottom-label" text="Bắt đầu lại" />
+                        <Label style="-fx-font-size: 12px;" styleClass="bottom-label" text="Bắt đầu lại" />
                     </VBox>
 
-                    <VBox alignment="CENTER" spacing="3.0">
-                        <Button fx:id="undoButton" mnemonicParsing="false" onAction="#onBack" prefHeight="60.0" prefWidth="40.0" styleClass="circular-btn-gold">
+                    <VBox alignment="CENTER" spacing="5.0">
+                        <Button fx:id="undoButton" mnemonicParsing="false" onAction="#onBack" prefHeight="70.0" prefWidth="70.0" styleClass="circular-btn-gold">
                             <graphic>
-                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../img/icon_undo.png" />
+                                    </image>
+                                </ImageView>
                             </graphic>
                         </Button>
-                        <Label style="-fx-font-size: 10px;" styleClass="bottom-label" text="Quay về" />
+                        <Label style="-fx-font-size: 12px;" styleClass="bottom-label" text="Quay về" />
                     </VBox>
                 </HBox>
-
-                <VBox alignment="CENTER" spacing="3.0">
-                    <Button fx:id="hintButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="40.0" styleClass="circular-btn-gold">
-                        <graphic>
-                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                        </graphic>
-                    </Button>
-                    <Label style="-fx-font-size: 10px;" styleClass="bottom-label" text="Gợi ý" />
-                </VBox>
             </children>
         </HBox>
     </bottom>
