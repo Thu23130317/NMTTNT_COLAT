@@ -73,8 +73,7 @@
     -fx-border-radius: 30px, 22px;
 
     -fx-effect:
-            dropshadow(three-pass-box, rgba(0,0,0,0.8), 50, 0.3, 0, 20),
-            glow(0.3);
+            dropshadow(three-pass-box, rgba(0,0,0,0.8), 50, 0.3, 0, 20);
     -fx-padding: 25px;
 }
 
@@ -150,7 +149,7 @@
 
 .circular-btn-gold:pressed {
     -fx-background-color: linear-gradient(to bottom, #ff9800 0%, #ffc107 100%);
-    -fx-effect: rgba(0,0,0,0.5);
+    -fx-effect: dropshadow(gaussian, #ff9800, 10, 0.4, 0, 0);
     -fx-translate-y: 2px;
 }
 
@@ -159,4 +158,51 @@
     -fx-font-weight: bold;
     -fx-text-fill: #ffca28;
     -fx-effect: dropshadow(one-pass-box, black, 2, 0.8, 0, 0);
+}
+
+/* =============== ANIMATIONS =============== */
+
+/* Smooth piece flip animation */
+.piece-flip-animation {
+    -fx-animation: flip 0.6s ease-in-out;
+}
+
+/* Highlight valid move cells */
+.valid-move-highlight {
+    -fx-background-color: rgba(255, 215, 0, 0.4);
+    -fx-border-color: rgba(255, 215, 0, 0.8);
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, #ffd700, 15, 0.8, 0, 0);
+}
+
+/* Active/Selected cell */
+.cell-active {
+    -fx-background-color: rgba(255, 215, 0, 0.25);
+    -fx-effect: glow(0.7);
+}
+
+/* Pulse effect for current turn */
+.turn-pulse {
+    -fx-animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Smooth transitions for button interactions */
+.circular-btn-gold, .grid-cell {
+    -fx-transition: all 0.2s ease;
+}
+
+/* Hover state for better UX */
+.piece-black:hover, .piece-white:hover {
+    -fx-effect: dropshadow(gaussian, #ffff00, 10, 0.8, 0, 0);
+}
+
+/* Disabled/locked state */
+.grid-cell-disabled {
+    -fx-cursor: not-allowed;
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Score update glow effect */
+.score-update {
+    -fx-effect: dropshadow(gaussian, #ffff00, 25, 1.0, 0, 0);
 }
