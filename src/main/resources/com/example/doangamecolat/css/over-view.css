@@ -102,3 +102,35 @@
     -fx-background-color: linear-gradient(to bottom, #A1887F 0%, #4E342E 100%);
     -fx-effect: dropshadow(gaussian, #FFD700, 15, 0.5, 0, 0);
 }
+
+/* =============== ANIMATIONS FOR GAME OVER =============== */
+
+/* Victory title entrance animation */
+.victory-title-entrance {
+    -fx-animation: slideDown 0.8s ease-out;
+}
+
+/* Score circle pulse for winner */
+.score-circle-winner-pulse {
+    -fx-animation: scorePulse 1.2s ease-in-out infinite;
+}
+
+/* Buttons smooth transition on hover */
+.btn-gem-green, .btn-gem-brown {
+    -fx-transition: all 0.3s ease;
+}
+
+.btn-gem-green:pressed {
+    -fx-background-color: linear-gradient(to bottom, #558B2F, #33691E);
+    -fx-translate-y: 2px;
+}
+
+.btn-gem-brown:pressed {
+    -fx-background-color: linear-gradient(to bottom, #3E2723, #5d4037);
+    -fx-translate-y: 2px;
+}
+
+/* Celebration glow on winner score */
+.winner-celebration {
+    -fx-effect: dropshadow(gaussian, #FFD700, 30, 1.0, 0, 0);
+}

@@ -1,6 +1,18 @@
 package com.example.doangamecolat.controller;
 
-import com.example.doangamecolat.model.*;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import com.example.doangamecolat.model.AIPlayer;
+import com.example.doangamecolat.model.Board;
+import com.example.doangamecolat.model.Game;
+import com.example.doangamecolat.model.HumanPlayer;
+import com.example.doangamecolat.model.Move;
+import com.example.doangamecolat.model.Piece;
+import com.example.doangamecolat.model.Player;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,13 +23,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class GameBoardController implements Initializable{
     @FXML private GridPane boardGrid;
@@ -26,11 +35,84 @@ public class GameBoardController implements Initializable{
 
     @FXML
     private void onBack(ActionEvent event) throws IOException {
-        switchScene(event, "/com/example/doangamecolat/view/menu-view.fxml", "Menu Game");
+        if (game != null && undoCount < 3 && game.undoLastMove()) {
+            undoCount++;
+            System.out.println("Undo lần " + undoCount + "/3");
+            updateUI();
+        } else if (undoCount >= 3) {
+            System.out.println("Đã hết lần undo!");
+            switchScene(event, "/com/example/doangamecolat/view/menu-view.fxml", "Menu Game");
+        } else {
+            switchScene(event, "/com/example/doangamecolat/view/menu-view.fxml", "Menu Game");
+        }
     }
     @FXML
     private void onRestart(ActionEvent event) throws IOException {
-        switchScene(event, "/com/example/doangamecolat/view/game-board-view.fxml", "Chơi Game");
+        if (game != null) {
+            game.restart();
+            hintCount = 0;  // Reset hint counter
+            undoCount = 0;  // Reset undo counter
+            updateUI();
+            processAiTurn();
+        }
+    }
+    
+    @FXML
+    private void onHint(ActionEvent event) {
+        if (game == null || isRunningAi) return;
+        
+        if (hintCount >= 3) {
+            System.out.println("Đã hết lần gợi ý!");
+            return;
+        }
+        
+        if (game.getCurrentPlayer() instanceof HumanPlayer) {
+            List<Move> validMoves = game.getValidMovesForCurrentPlayer();
+            if (validMoves.isEmpty()) {
+                System.out.println("Không có nước đi hợp lệ!");
+                return;
+            }
+            
+            Move bestMove = com.example.doangamecolat.ai.MiniMax.findBestMove(
+                game.getBoard(), 
+                game.getCurrentPlayer().getPieceColor(), 
+                3
+            );
+            
+            if (bestMove != null) {
+                hintCount++;
+                highlightHintCell(bestMove.getRow(), bestMove.getCol());
+                System.out.println("Gợi ý lần " + hintCount + "/3: Đánh ở (" + bestMove.getRow() + ", " + bestMove.getCol() + ")");
+            }
+        }
+    }
+    
+    private void highlightHintCell(int row, int col) {
+        StackPane cell = getCellPane(row, col);
+        if (cell != null) {
+            // Tạo dấu chấm đen ở giữa ô
+            Circle hintDot = new Circle(5);
+            hintDot.setStyle("-fx-fill: black;");
+            hintDot.setId("hint-dot");
+            cell.getChildren().add(hintDot);
+            
+            // Tự động xóa hint sau 2 giây
+            new Thread(() -> {
+                try {
+                    Thread.sleep(2000);
+                    javafx.application.Platform.runLater(() -> {
+                        for (var child : cell.getChildren()) {
+                            if (child instanceof Circle && child.getId() != null && child.getId().equals("hint-dot")) {
+                                cell.getChildren().remove(child);
+                                break;
+                            }
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
     }
     private void switchScene(ActionEvent event, String fxmlPath, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -46,6 +128,8 @@ public class GameBoardController implements Initializable{
     private Player blackPlayer;
     private Player whitePlayer;
     private boolean isRunningAi = false;
+    private int hintCount = 0; // Đếm số lần dùng gợi ý
+    private int undoCount = 0; // Đếm số lần dùng undo
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -111,9 +195,32 @@ public class GameBoardController implements Initializable{
         whiteScoreLabel.setText(String.valueOf(game.getScore(Piece.WHITE)));
 
         renderBoard();
+        highlightValidMoves();
 
         if (game.isGameOver()) {
             showGameOver();
+        }
+    }
+    
+    private void highlightValidMoves() {
+        // Xóa tất cả dấu chấm hợp lệ cũ
+        for (var node : boardGrid.getChildren()) {
+            if (node instanceof StackPane) {
+                var children = ((StackPane) node).getChildren();
+                children.removeIf(child -> child instanceof Circle && child.getId() != null && child.getId().equals("valid-dot"));
+            }
+        }
+        
+        // Thêm dấu chấm xanh cho nước đi hợp lệ
+        List<Move> validMoves = game.getValidMovesForCurrentPlayer();
+        for (Move move : validMoves) {
+            StackPane cell = getCellPane(move.getRow(), move.getCol());
+            if (cell != null) {
+                Circle validDot = new Circle(4);
+                validDot.setFill(Color.LIME); // Xanh lá sáng
+                validDot.setId("valid-dot");
+                cell.getChildren().add(validDot);
+            }
         }
     }
     private void showGameOver() {

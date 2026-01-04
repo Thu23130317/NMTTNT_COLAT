@@ -1,5 +1,7 @@
 package com.example.doangamecolat.controller;
 
+import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,8 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class MenuController {
     @FXML
     private void onPlayBtn(ActionEvent event) throws IOException {
@@ -19,7 +19,7 @@ public class MenuController {
 
     @FXML
     private void onSettingsBtn(ActionEvent event) throws IOException {
-        switchScene(event, "/com/example/doangamecolat/view/settings-view.fxml", "Cài đặt Game");
+        switchScene(event, "/com/example/doangamecolat/view/how-to-play-view.fxml", "Hướng Dẫn Chơi");
     }
 
     @FXML
