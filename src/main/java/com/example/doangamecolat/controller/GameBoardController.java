@@ -50,70 +50,12 @@ public class GameBoardController implements Initializable{
     private void onRestart(ActionEvent event) throws IOException {
         if (game != null) {
             game.restart();
-            hintCount = 0;  // Reset hint counter
             undoCount = 0;  // Reset undo counter
             updateUI();
             processAiTurn();
         }
     }
     
-    @FXML
-    private void onHint(ActionEvent event) {
-        if (game == null || isRunningAi) return;
-        
-        if (hintCount >= 3) {
-            System.out.println("Đã hết lần gợi ý!");
-            return;
-        }
-        
-        if (game.getCurrentPlayer() instanceof HumanPlayer) {
-            List<Move> validMoves = game.getValidMovesForCurrentPlayer();
-            if (validMoves.isEmpty()) {
-                System.out.println("Không có nước đi hợp lệ!");
-                return;
-            }
-            
-            Move bestMove = com.example.doangamecolat.ai.MiniMax.findBestMove(
-                game.getBoard(), 
-                game.getCurrentPlayer().getPieceColor(), 
-                3
-            );
-            
-            if (bestMove != null) {
-                hintCount++;
-                highlightHintCell(bestMove.getRow(), bestMove.getCol());
-                System.out.println("Gợi ý lần " + hintCount + "/3: Đánh ở (" + bestMove.getRow() + ", " + bestMove.getCol() + ")");
-            }
-        }
-    }
-    
-    private void highlightHintCell(int row, int col) {
-        StackPane cell = getCellPane(row, col);
-        if (cell != null) {
-            // Tạo dấu chấm đen ở giữa ô
-            Circle hintDot = new Circle(5);
-            hintDot.setStyle("-fx-fill: black;");
-            hintDot.setId("hint-dot");
-            cell.getChildren().add(hintDot);
-            
-            // Tự động xóa hint sau 2 giây
-            new Thread(() -> {
-                try {
-                    Thread.sleep(2000);
-                    javafx.application.Platform.runLater(() -> {
-                        for (var child : cell.getChildren()) {
-                            if (child instanceof Circle && child.getId() != null && child.getId().equals("hint-dot")) {
-                                cell.getChildren().remove(child);
-                                break;
-                            }
-                        }
-                    });
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }).start();
-        }
-    }
     private void switchScene(ActionEvent event, String fxmlPath, String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent root = loader.load();
@@ -128,7 +70,6 @@ public class GameBoardController implements Initializable{
     private Player blackPlayer;
     private Player whitePlayer;
     private boolean isRunningAi = false;
-    private int hintCount = 0; // Đếm số lần dùng gợi ý
     private int undoCount = 0; // Đếm số lần dùng undo
 
     @Override

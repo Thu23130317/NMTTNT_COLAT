@@ -84,7 +84,7 @@
                             </VBox.margin>
                         </HBox>
 
-                        <Label fx:id="winnerLabel" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-effect: dropshadow(one-pass-box, black, 3, 0.5, 0, 0);" text="BLACK WINS!" textFill="#ffd700">
+                        <Label fx:id="winnerLabel" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-effect: dropshadow(one-pass-box, black, 3, 0.5, 0, 0);" text="QUÂN ĐEN THẮNG!" textFill="#ffd700">
                             <VBox.margin>
                                 <Insets bottom="5.0" top="15.0" />
                             </VBox.margin>
@@ -92,8 +92,8 @@
 
                         <HBox alignment="CENTER" spacing="20.0">
                             <children>
-                                <Button fx:id="playAgainButton" onAction="#onPlayAgain" prefHeight="60" prefWidth="180" styleClass="btn-gem-green" text="Play Again" />
-                                <Button fx:id="menuButton" onAction="#onMenuBtn" prefHeight="60" prefWidth="180" styleClass="btn-gem-brown" text="Menu" />
+                                <Button fx:id="playAgainButton" onAction="#onPlayAgain" prefHeight="60" prefWidth="180" styleClass="btn-gem-green" text="Chơi lại" />
+                                <Button fx:id="menuButton" onAction="#onMenuBtn" prefHeight="60" prefWidth="180" styleClass="btn-gem-brown" text="Trở về" />
                             </children>
                             <VBox.margin>
                                 <Insets top="10.0" />

@@ -12,9 +12,21 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/doangamecolat/view/menu-view.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
+        
         stage.setTitle("Menu Cờ Lật");
         stage.setScene(scene);
+        stage.setWidth(1280);
+        stage.setHeight(720);
         stage.setResizable(false);
+        stage.centerOnScreen();
+        
+        // Phím F11 để toggle fullscreen
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode().toString().equals("F11")) {
+                stage.setFullScreen(!stage.isFullScreen());
+            }
+        });
+        
         stage.show();
     }
 
