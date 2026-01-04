@@ -28,3 +28,28 @@
     -fx-background-color: linear-gradient(to bottom, #3E2723, #5D4037);
     -fx-translate-y: 2;
 }
+
+/* =============== MENU ANIMATIONS =============== */
+
+/* Smooth button transitions */
+.menu-button {
+    -fx-transition: all 0.3s ease;
+}
+
+/* Logo fade-in effect */
+.logo-fade-in {
+    -fx-animation: fadeIn 1.0s ease-in;
+}
+
+/* Button group stagger animation */
+.menu-button-group {
+    -fx-animation: staggerIn 0.6s ease-out;
+}
+
+/* Hover scale effect already in :hover state above */
+
+/* Active/Focused state */
+.menu-button:focused {
+    -fx-border-color: #FFFF00;
+    -fx-effect: dropshadow(three-pass-box, #FFD700, 20, 0.8, 0, 0);
+}
