@@ -47,7 +47,7 @@
                                     </ImageView>
                                 </StackPane>
                                 <VBox alignment="CENTER_LEFT" spacing="0.0">
-                                    <Label style="-fx-font-size: 12px;" styleClass="player-name-label" text="NGƯỜI CHƠI (Đen):" textFill="#ffeca0">
+                                    <Label fx:id="blackPlayerNameLabel" style="-fx-font-size: 12px;" styleClass="player-name-label" text="NGƯỜI CHƠI (Đen):" textFill="#ffeca0">
                                     </Label>
                                     <StackPane styleClass="score-bar-glow">
                                         <Label fx:id="blackScoreLabel" styleClass="score-text" text="32" textFill="WHITE">
@@ -60,17 +60,10 @@
 
                         <StackPane>
                             <children>
-                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../img/sun_emblem.png" />
-                                    </image>
-                                    <effect>
-                                        <DropShadow color="#ffd700cc" height="20.0" radius="9.5" width="20.0" />
-                                    </effect>
-                                </ImageView>
+
                                 <VBox alignment="CENTER" translateY="-2.0">
                                     <Label style="-fx-font-size: 10px;" styleClass="turn-label-small" text="LƯỢT" textFill="#3e2723" />
-                                    <Label style="-fx-font-size: 14px;" styleClass="turn-label-large" text="CỦA BẠN" textFill="#3e2723" />
+                                    <Label fx:id="turnIndicatorLabel" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="turn-label-large" text="CỦA BẠN" textFill="#3e2723" />
                                 </VBox>
                             </children>
                         </StackPane>
@@ -78,7 +71,7 @@
                         <HBox alignment="CENTER_RIGHT" spacing="8.0" styleClass="player-panel">
                             <children>
                                 <VBox alignment="CENTER_RIGHT" spacing="0.0">
-                                    <Label style="-fx-font-size: 12px;" styleClass="player-name-label" text="MÁY (Trắng):" textFill="#ffeca0" />
+                                    <Label fx:id="whitePlayerNameLabel" style="-fx-font-size: 12px;" styleClass="player-name-label" text="MÁY (Trắng):" textFill="#ffeca0" />
                                     <StackPane styleClass="score-bar-glow">
                                         <Label fx:id="whiteScoreLabel" styleClass="score-text" text="28" textFill="WHITE">
                                             <effect><Glow level="0.9" /></effect>

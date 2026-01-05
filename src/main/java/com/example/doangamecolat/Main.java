@@ -17,7 +17,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setWidth(1280);
         stage.setHeight(720);
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.centerOnScreen();
         
         // Phím F11 để toggle fullscreen

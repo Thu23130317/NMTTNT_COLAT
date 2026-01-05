@@ -43,6 +43,9 @@ public class GameBoardController implements Initializable{
     @FXML private GridPane boardGrid;
     @FXML private Label blackScoreLabel;
     @FXML private Label whiteScoreLabel;
+    @FXML private Label turnIndicatorLabel;
+    @FXML private Label blackPlayerNameLabel;
+    @FXML private Label whitePlayerNameLabel;
 
     @FXML
     private void onBack(ActionEvent event) throws IOException {
@@ -208,6 +211,9 @@ public class GameBoardController implements Initializable{
         this.blackPlayer = blackPlayer;
         this.whitePlayer = whitePlayer;
         this.game = new Game(blackPlayer, whitePlayer);
+        
+        // Cập nhật tên người chơi
+        updatePlayerNames();
 
         updateUI();
         processAiTurn();
@@ -261,12 +267,61 @@ public class GameBoardController implements Initializable{
     private void updateUI() {
         blackScoreLabel.setText(String.valueOf(game.getScore(Piece.BLACK)));
         whiteScoreLabel.setText(String.valueOf(game.getScore(Piece.WHITE)));
+        
+        // Cập nhật chỉ báo lượt đi
+        updateTurnIndicator();
 
         renderBoard();
         highlightValidMoves();
 
         if (game.isGameOver()) {
             showGameOver();
+        }
+    }
+    
+    private void updatePlayerNames() {
+        if (blackPlayerNameLabel != null) {
+            if (blackPlayer instanceof HumanPlayer) {
+                blackPlayerNameLabel.setText("NGƯỜI CHƠI (Đen):");
+            } else {
+                blackPlayerNameLabel.setText("MÁY (Đen):");
+            }
+        }
+        
+        if (whitePlayerNameLabel != null) {
+            if (whitePlayer instanceof HumanPlayer) {
+                whitePlayerNameLabel.setText("NGƯỜI CHƠI (Trắng):");
+            } else {
+                whitePlayerNameLabel.setText("MÁY (Trắng):");
+            }
+        }
+    }
+    
+    private void updateTurnIndicator() {
+        if (turnIndicatorLabel == null) return;
+        
+        if (game.isGameOver()) {
+            turnIndicatorLabel.setText("KẾT THÚC");
+            return;
+        }
+        
+        Player currentPlayer = game.getCurrentPlayer();
+        Piece currentColor = currentPlayer.getPieceColor();
+        
+        if (currentPlayer instanceof HumanPlayer) {
+            // Lượt người chơi
+            if (currentColor == Piece.BLACK) {
+                turnIndicatorLabel.setText("ĐEN (BẠN)");
+            } else {
+                turnIndicatorLabel.setText("TRẮNG (BẠN)");
+            }
+        } else {
+            // Lượt máy
+            if (currentColor == Piece.BLACK) {
+                turnIndicatorLabel.setText("ĐEN (MÁY)");
+            } else {
+                turnIndicatorLabel.setText("TRẮNG (MÁY)");
+            }
         }
     }
     
