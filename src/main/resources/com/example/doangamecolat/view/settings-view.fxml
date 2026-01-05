@@ -38,7 +38,7 @@
                         <Label styleClass="section-label" text="Chế độ chơi:" />
                         <HBox alignment="CENTER" spacing="20.0">
                             <children>
-                                <ToggleButton fx:id="pveButton" minWidth="180.0" mnemonicParsing="false" styleClass="game-mode-button" text="Đấu với Máy&#10;(PvE)">
+                                <ToggleButton fx:id="pveButton" minWidth="180.0" mnemonicParsing="false" selected="true" styleClass="game-mode-button" text="Đấu với Máy&#10;(PvE)">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
@@ -47,7 +47,34 @@
                                     </toggleGroup>
                                 </ToggleButton>
 
-                                <ToggleButton fx:id="pvpButton" minWidth="180.0" mnemonicParsing="false" selected="true" styleClass="game-mode-button" text="Đấu với Người&#10;(PvP)" toggleGroup="$modeGroup">
+                                <ToggleButton fx:id="pvpButton" minWidth="180.0" mnemonicParsing="false" styleClass="game-mode-button" text="Đấu với Người&#10;(PvP)" toggleGroup="$modeGroup">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </ToggleButton>
+                            </children>
+                        </HBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="10.0">
+                    <children>
+                        <Label styleClass="section-label" text="Chọn màu cờ:" />
+                        <HBox alignment="CENTER" spacing="20.0">
+                            <children>
+                                <ToggleButton fx:id="blackColorButton" minWidth="180.0" mnemonicParsing="false" selected="true" styleClass="game-mode-button" text="Quân Đen">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <toggleGroup>
+                                        <ToggleGroup fx:id="colorGroup" />
+                                    </toggleGroup>
+                                </ToggleButton>
+
+                                <ToggleButton fx:id="whiteColorButton" minWidth="180.0" mnemonicParsing="false" styleClass="game-mode-button" text="Quân Trắng" toggleGroup="$colorGroup">
                                     <font>
                                         <Font size="16.0" />
                                     </font>

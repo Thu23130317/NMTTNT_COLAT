@@ -38,16 +38,16 @@
                         <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="player-panel">
                             <children>
                                 <StackPane>
-                                    <Circle radius="28.0" styleClass="avatar-frame" />
-                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                        <clip><Circle centerX="25" centerY="25" radius="25" /></clip>
+                                    <Circle radius="24.0" styleClass="avatar-frame" />
+                                    <ImageView fitHeight="44.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                        <clip><Circle centerX="22" centerY="22" radius="22" /></clip>
                                         <image>
                                             <Image url="@../img/avatar_p1.jpg" />
                                         </image>
                                     </ImageView>
                                 </StackPane>
                                 <VBox alignment="CENTER_LEFT" spacing="0.0">
-                                    <Label fx:id="blackPlayerNameLabel" style="-fx-font-size: 12px;" styleClass="player-name-label" text="NGƯỜI CHƠI (Đen):" textFill="#ffeca0">
+                                    <Label fx:id="blackPlayerNameLabel" style="-fx-font-size: 10px;" styleClass="player-name-label" text="NGƯỜI CHƠI (Đen):" textFill="#ffeca0">
                                     </Label>
                                     <StackPane styleClass="score-bar-glow">
                                         <Label fx:id="blackScoreLabel" styleClass="score-text" text="32" textFill="WHITE">
@@ -71,14 +71,14 @@
                         <HBox alignment="CENTER_RIGHT" spacing="8.0" styleClass="player-panel">
                             <children>
                                 <VBox alignment="CENTER_RIGHT" spacing="0.0">
-                                    <Label fx:id="whitePlayerNameLabel" style="-fx-font-size: 12px;" styleClass="player-name-label" text="MÁY (Trắng):" textFill="#ffeca0" />
+                                    <Label fx:id="whitePlayerNameLabel" style="-fx-font-size: 10px;" styleClass="player-name-label" text="MÁY (Trắng):" textFill="#ffeca0" />
                                     <StackPane styleClass="score-bar-glow">
                                         <Label fx:id="whiteScoreLabel" styleClass="score-text" text="28" textFill="WHITE">
                                             <effect><Glow level="0.9" /></effect>
                                         </Label>
                                     </StackPane>
                                 </VBox>
-                                <Circle radius="28.0" styleClass="avatar-frame-ai" />
+                                <Circle radius="24.0" styleClass="avatar-frame-ai" />
                             </children>
                         </HBox>
                     </children>
