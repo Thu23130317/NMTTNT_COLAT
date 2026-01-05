@@ -48,6 +48,10 @@ public class SettingsController {
         soundEffectsToggle.setSelected(settingsManager.isSoundEffectsEnabled());
         musicToggle.setSelected(settingsManager.isMusicEnabled());
         
+        // Cập nhật icon ban đầu
+        updateSoundEffectsIcon();
+        updateMusicIcon();
+        
         // Áp dụng cài đặt vào SoundManager
         soundManager.setSoundEffectsEnabled(settingsManager.isSoundEffectsEnabled());
         soundManager.setMusicEnabled(settingsManager.isMusicEnabled());
@@ -56,6 +60,7 @@ public class SettingsController {
         soundEffectsToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
             settingsManager.setSoundEffectsEnabled(newVal);
             soundManager.setSoundEffectsEnabled(newVal);
+            updateSoundEffectsIcon();
             System.out.println("Hiệu ứng âm thanh: " + (newVal ? "BẬT" : "TẮT"));
         });
         
@@ -63,6 +68,7 @@ public class SettingsController {
         musicToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
             settingsManager.setMusicEnabled(newVal);
             soundManager.setMusicEnabled(newVal);
+            updateMusicIcon();
             System.out.println("Nhạc nền: " + (newVal ? "BẬT" : "TẮT"));
         });
         
@@ -74,6 +80,22 @@ public class SettingsController {
                     difficultyBox.setVisible(false);
                 }
             });
+        }
+    }
+    
+    private void updateSoundEffectsIcon() {
+        if (soundEffectsToggle.isSelected()) {
+            soundEffectsToggle.setText("🔊 Hiệu ứng âm thanh");
+        } else {
+            soundEffectsToggle.setText("🔇 Hiệu ứng âm thanh");
+        }
+    }
+    
+    private void updateMusicIcon() {
+        if (musicToggle.isSelected()) {
+            musicToggle.setText("🎵 Nhạc nền");
+        } else {
+            musicToggle.setText("🔕 Nhạc nền");
         }
     }
 

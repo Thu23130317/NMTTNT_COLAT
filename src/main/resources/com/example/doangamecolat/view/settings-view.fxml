@@ -16,7 +16,7 @@
     <children>
         <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="false">
             <image>
-                <Image url="@../img/bancosetting.png" />
+                <Image url="@../img/settings-view-bg.png" />
             </image>
         </ImageView>
 
@@ -38,7 +38,7 @@
                         <Label styleClass="section-label" text="Chế độ chơi:" />
                         <HBox alignment="CENTER" spacing="20.0">
                             <children>
-                                <ToggleButton fx:id="pveButton" mnemonicParsing="false" selected="true" styleClass="game-mode-button" text="Đấu với Máy&#10;(PvE)">
+                                <ToggleButton fx:id="pveButton" minWidth="180.0" mnemonicParsing="false" styleClass="game-mode-button" text="Đấu với Máy&#10;(PvE)">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
@@ -47,7 +47,7 @@
                                     </toggleGroup>
                                 </ToggleButton>
 
-                                <ToggleButton fx:id="pvpButton" mnemonicParsing="false" styleClass="game-mode-button" text="Đấu với Người&#10;(PvP)" toggleGroup="$modeGroup">
+                                <ToggleButton fx:id="pvpButton" minWidth="180.0" mnemonicParsing="false" selected="true" styleClass="game-mode-button" text="Đấu với Người&#10;(PvP)" toggleGroup="$modeGroup">
                                     <font>
                                         <Font size="16.0" />
                                     </font>

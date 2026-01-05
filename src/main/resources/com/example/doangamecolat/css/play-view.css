@@ -5,7 +5,7 @@
 }
 
 .play-background {
-    -fx-background-color: linear-gradient(to bottom, rgba(62, 39, 35, 0.9), rgba(255, 160, 0, 0.4));
+    -fx-background-color: linear-gradient(to bottom, rgba(26, 26, 42, 0.95), rgba(15, 27, 46, 0.95));
 }
 
 .play-container {
@@ -13,42 +13,42 @@
 }
 
 .difficulty-panel {
-    -fx-background-color: linear-gradient(to bottom, #fff8e1, #ffecb3);
+    -fx-background-color: linear-gradient(to bottom, rgba(42, 42, 58, 0.85), rgba(30, 30, 50, 0.85));
     -fx-background-radius: 20;
-    -fx-border-color: #8d6e63;
+    -fx-border-color: linear-gradient(to right, #DAA520, #00CED1);
     -fx-border-width: 4px;
     -fx-border-radius: 18;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 30, 0, 0, 10);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 206, 209, 0.6), 30, 0.5, 0, 10);
     -fx-padding: 30px;
 }
 
 .difficulty-title {
-    -fx-text-fill: #3e2723;
+    -fx-text-fill: #FFFFFF;
     -fx-font-family: "Segoe UI", sans-serif;
     -fx-font-weight: bold;
     -fx-font-size: 28px;
-    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.3), 0, 0, 0, 2);
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 206, 209, 0.6), 8, 0, 0, 2);
 }
 
 .difficulty-button {
-    -fx-background-color: linear-gradient(to bottom, #d7ccc8, #bcaaa4);
-    -fx-text-fill: #3e2723;
+    -fx-background-color: linear-gradient(to bottom, rgba(218, 165, 32, 0.7), rgba(0, 206, 209, 0.5));
+    -fx-text-fill: #FFFFFF;
     -fx-background-radius: 12;
     -fx-cursor: hand;
-    -fx-border-color: #a1887f;
+    -fx-border-color: linear-gradient(to right, #DAA520, #00CED1);
     -fx-border-width: 2px;
     -fx-border-radius: 12;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-padding: 12px 25px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0.3, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(0, 206, 209, 0.6), 10, 0.5, 0, 0);
 }
 
 .difficulty-button:hover {
-    -fx-background-color: linear-gradient(to bottom, #efebe9, #d7ccc8);
-    -fx-effect: dropshadow(gaussian, #ffd700, 10, 0.5, 0, 0);
-    -fx-scale-x: 1.05;
-    -fx-scale-y: 1.05;
+    -fx-background-color: linear-gradient(to bottom, rgba(218, 165, 32, 0.9), rgba(0, 206, 209, 0.7));
+    -fx-effect: dropshadow(gaussian, #00CED1, 15, 0.7, 0, 0);
+    -fx-scale-x: 1.08;
+    -fx-scale-y: 1.08;
 }
 
 .difficulty-button:pressed {

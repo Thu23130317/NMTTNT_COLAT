@@ -16,23 +16,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<BorderPane maxWidth="1024.0" prefHeight="400.0" styleClass="game-background" stylesheets="/com/example/doangamecolat/css/board-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.GameBoardController">
+<StackPane maxWidth="1280.0" prefHeight="720.0" styleClass="game-background" stylesheets="/com/example/doangamecolat/css/board-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.doangamecolat.controller.GameBoardController">
+    <children>
+        <!-- Background Image Layer -->
+        <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="false">
+            <image>
+                <Image url="@../img/game-board-bg.png" />
+            </image>
+        </ImageView>
 
+        <!-- Main Content Layer -->
+        <BorderPane maxWidth="1280.0" prefHeight="720.0" maxHeight="720.0">
     <top>
-        <StackPane BorderPane.alignment="CENTER">
+        <StackPane prefHeight="140.0" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="40.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="false">
-                    <image>
-                        <Image url="@../img/top_banner_bg.png" />
-                    </image>
-                </ImageView>
-
-                <HBox alignment="CENTER" spacing="10.0">
+                <HBox alignment="CENTER" spacing="30.0" maxHeight="140.0">
                     <padding>
-                        <Insets top="5.0" />
+                        <Insets top="10.0" bottom="10.0" left="20.0" right="20.0" />
                     </padding>
                     <children>
-                        <HBox alignment="CENTER_LEFT" spacing="8.0" styleClass="player-panel">
+                        <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="player-panel">
                             <children>
                                 <StackPane>
                                     <Circle radius="28.0" styleClass="avatar-frame" />
@@ -129,53 +132,34 @@
     </center>
 
     <bottom>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="500.0" spacing="60.0" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" prefHeight="100.0" BorderPane.alignment="CENTER">
             <padding>
-                <Insets bottom="20.0" top="10.0" />
+                <Insets bottom="15.0" top="10.0" />
             </padding>
             <children>
-                <VBox alignment="CENTER" spacing="5.0">
-                    <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#onSettingsButton" prefHeight="70.0" prefWidth="70.0" styleClass="circular-btn-gold">
-                        <graphic>
-                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="@../img/icon_gear.png" />
-                                </image>
-                            </ImageView>
-                        </graphic>
-                    </Button>
-                    <Label style="-fx-font-size: 12px;" styleClass="bottom-label" text="Cài đặt" />
-                </VBox>
+                <!-- Main Controls Row -->
+                <HBox alignment="CENTER" spacing="80.0">
+                    <children>
+                        <VBox alignment="CENTER" spacing="5.0">
+                            <Button mnemonicParsing="false" onAction="#onSettingsButton" prefHeight="70.0" prefWidth="70.0" styleClass="circular-btn-gold" style="-fx-font-size: 32px; -fx-content-display: TEXT_ONLY;" text="⚙" />
+                            <Label style="-fx-font-size: 12px;" styleClass="bottom-label" text="Cài đặt" />
+                        </VBox>
 
-                <HBox spacing="20.0">
-                    <VBox alignment="CENTER" spacing="5.0">
-                        <Button fx:id="restartButton" mnemonicParsing="false" onAction="#onRestart" prefHeight="70.0" prefWidth="70.0" styleClass="circular-btn-gold">
-                            <graphic>
-                                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../img/icon_restart.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Label style="-fx-font-size: 12px;" styleClass="bottom-label" text="Bắt đầu lại" />
-                    </VBox>
+                        <VBox alignment="CENTER" spacing="5.0">
+                            <Button mnemonicParsing="false" onAction="#onRestart" prefHeight="70.0" prefWidth="70.0" styleClass="circular-btn-gold" style="-fx-font-size: 32px; -fx-content-display: TEXT_ONLY;" text="🔁" />
+                            <Label style="-fx-font-size: 12px;" styleClass="bottom-label" text="Bắt đầu lại" />
+                        </VBox>
 
-                    <VBox alignment="CENTER" spacing="5.0">
-                        <Button fx:id="undoButton" mnemonicParsing="false" onAction="#onBack" prefHeight="70.0" prefWidth="70.0" styleClass="circular-btn-gold">
-                            <graphic>
-                                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../img/icon_undo.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </Button>
-                        <Label style="-fx-font-size: 12px;" styleClass="bottom-label" text="Quay về" />
-                    </VBox>
+                        <VBox alignment="CENTER" spacing="5.0">
+                            <Button mnemonicParsing="false" onAction="#onBack" prefHeight="70.0" prefWidth="70.0" styleClass="circular-btn-gold" style="-fx-font-size: 32px; -fx-content-display: TEXT_ONLY;" text="⏮" />
+                            <Label style="-fx-font-size: 12px;" styleClass="bottom-label" text="Quay về" />
+                        </VBox>
+                    </children>
                 </HBox>
             </children>
-        </HBox>
+        </VBox>
     </bottom>
 
 </BorderPane>
+    </children>
+</StackPane>

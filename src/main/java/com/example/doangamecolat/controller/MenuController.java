@@ -23,6 +23,11 @@ public class MenuController {
     }
 
     @FXML
+    private void onHowToPlayBtn(ActionEvent event) throws IOException {
+        switchScene(event, "/com/example/doangamecolat/view/settings-view.fxml", "Cài Đặt");
+    }
+
+    @FXML
     private void onExitBtn(ActionEvent event) {
         Platform.exit();
         System.exit(0);
