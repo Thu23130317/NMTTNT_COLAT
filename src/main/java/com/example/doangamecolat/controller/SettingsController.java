@@ -11,7 +11,7 @@ import com.example.doangamecolat.settings.SettingsManager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader; // Đổi từ RadioButton sang ToggleButton
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -43,6 +43,17 @@ public class SettingsController {
     private ToggleButton blackColorButton;
     @FXML
     private ToggleButton whiteColorButton;
+    
+    // AI Type Selection
+    @FXML
+    private VBox aiTypeBox;
+    @FXML
+    private ToggleGroup aiTypeGroup;
+    @FXML
+    private ToggleButton minimaxButton;
+    @FXML
+    private ToggleButton alphaBetaButton;
+
     
     @FXML
     public void initialize() {
@@ -82,16 +93,20 @@ public class SettingsController {
             // Kiểm tra giá trị ban đầu
             if (pveButton.isSelected()) {
                 difficultyBox.setVisible(true);
+                if (aiTypeBox != null) aiTypeBox.setVisible(true);
             } else {
                 difficultyBox.setVisible(false);
+                if (aiTypeBox != null) aiTypeBox.setVisible(false);
             }
             
             // Listener khi thay đổi chế độ chơi
             modeGroup.selectedToggleProperty().addListener((obs, oldVal, newVal) -> {
                 if (newVal == pveButton) {
                     difficultyBox.setVisible(true);
+                    if (aiTypeBox != null) aiTypeBox.setVisible(true);
                 } else {
                     difficultyBox.setVisible(false);
+                    if (aiTypeBox != null) aiTypeBox.setVisible(false);
                 }
             });
         }
@@ -123,12 +138,15 @@ public class SettingsController {
             if (easyButton.isSelected()) maxDepth = 2;
             else if (hardButton.isSelected()) maxDepth = 6;
 
+            // Xác định loại AI được chọn
+            boolean useAlphaBeta = aiTypeGroup != null && alphaBetaButton != null && alphaBetaButton.isSelected();
+
             // Chọn màu cờ: Nếu chọn đen -> Bạn là đen, AI là trắng; Nếu chọn trắng -> Bạn là trắng, AI là đen
             if (blackColorButton.isSelected()) {
                 blackPlayer = new HumanPlayer(Piece.BLACK);
-                whitePlayer = new AIPlayer(Piece.WHITE, maxDepth);
+                whitePlayer = new AIPlayer(Piece.WHITE, maxDepth, useAlphaBeta);
             } else {
-                blackPlayer = new AIPlayer(Piece.BLACK, maxDepth);
+                blackPlayer = new AIPlayer(Piece.BLACK, maxDepth, useAlphaBeta);
                 whitePlayer = new HumanPlayer(Piece.WHITE);
             }
         } else {
