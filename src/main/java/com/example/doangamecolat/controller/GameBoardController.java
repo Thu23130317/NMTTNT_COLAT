@@ -201,6 +201,8 @@ public class GameBoardController implements Initializable{
     private boolean isRunningAi = false;
     private int undoCount = 0; // Đếm số lần dùng undo
     private Map<String, Piece> previousBoardState = new HashMap<>(); // Lưu trạng thái board trước đó
+    private boolean isPvEMode = false; // false=PvP, true=PvE
+    private boolean playerChosenBlack = true; // true=Quân Đen, false=Quân Trắng
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -217,6 +219,12 @@ public class GameBoardController implements Initializable{
 
         updateUI();
         processAiTurn();
+    }
+    
+    // Setter để nhận mode (PvE/PvP) và color (Đen/Trắng) từ SettingsController
+    public void setGameMode(boolean isPvE, boolean playerChosenBlack) {
+        this.isPvEMode = isPvE;
+        this.playerChosenBlack = playerChosenBlack;
     }
 
 
@@ -280,19 +288,45 @@ public class GameBoardController implements Initializable{
     }
     
     private void updatePlayerNames() {
-        if (blackPlayerNameLabel != null) {
-            if (blackPlayer instanceof HumanPlayer) {
-                blackPlayerNameLabel.setText("NGƯỜI CHƠI (Đen):");
-            } else {
-                blackPlayerNameLabel.setText("MÁY (Đen):");
-            }
-        }
+        boolean isPvP = (blackPlayer instanceof HumanPlayer) && (whitePlayer instanceof HumanPlayer);
         
-        if (whitePlayerNameLabel != null) {
-            if (whitePlayer instanceof HumanPlayer) {
-                whitePlayerNameLabel.setText("NGƯỜI CHƠI (Trắng):");
+        if (isPvP) {
+            // PvP: dựa vào color được chọn
+            if (playerChosenBlack) {
+                // Chọn Quân Đen: Bạn là Đen, Đối thủ là Trắng
+                if (blackPlayerNameLabel != null) {
+                    blackPlayerNameLabel.setText("ĐEN (BẠN):");
+                }
+                if (whitePlayerNameLabel != null) {
+                    whitePlayerNameLabel.setText("TRẮNG (ĐỐI THỦ):");
+                }
             } else {
-                whitePlayerNameLabel.setText("MÁY (Trắng):");
+                // Chọn Quân Trắng: Đối thủ là Đen, Bạn là Trắng
+                if (blackPlayerNameLabel != null) {
+                    blackPlayerNameLabel.setText("ĐEN (ĐỐI THỦ):");
+                }
+                if (whitePlayerNameLabel != null) {
+                    whitePlayerNameLabel.setText("TRẮNG (BẠN):");
+                }
+            }
+        } else {
+            // PvE: dựa vào color được chọn
+            if (playerChosenBlack) {
+                // Chọn Quân Đen: Người chơi là Đen, Máy là Trắng
+                if (blackPlayerNameLabel != null) {
+                    blackPlayerNameLabel.setText("ĐEN (Người chơi):");
+                }
+                if (whitePlayerNameLabel != null) {
+                    whitePlayerNameLabel.setText("TRẮNG (Máy):");
+                }
+            } else {
+                // Chọn Quân Trắng: Máy là Đen, Người chơi là Trắng
+                if (blackPlayerNameLabel != null) {
+                    blackPlayerNameLabel.setText("ĐEN (Máy):");
+                }
+                if (whitePlayerNameLabel != null) {
+                    whitePlayerNameLabel.setText("TRẮNG (Người chơi):");
+                }
             }
         }
     }

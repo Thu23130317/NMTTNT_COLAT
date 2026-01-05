@@ -22,7 +22,6 @@
                <children>
                   <JFXButton fx:id="btnStartGame" onAction="#onPlayBtn" prefHeight="50.0" prefWidth="200.0" styleClass="modern-button" text="Bắt đầu" />
                   <JFXButton fx:id="btnSettings" onAction="#onSettingsBtn" prefHeight="50.0" prefWidth="200.0" styleClass="modern-button" text="Luật chơi" />
-                  <JFXButton fx:id="btnHowToPlay" onAction="#onHowToPlayBtn" prefHeight="50.0" prefWidth="200.0" styleClass="modern-button" text="Cài đặt" />
                   <JFXButton fx:id="btnExit" onAction="#onExitBtn" prefHeight="50.0" prefWidth="200.0" styleClass="modern-button" text="Thoát" />
                </children>
                <VBox.margin>

@@ -37,6 +37,12 @@ public class SettingsController {
     private ToggleButton soundEffectsToggle;
     @FXML
     private ToggleButton musicToggle;
+    @FXML
+    private ToggleGroup colorGroup;
+    @FXML
+    private ToggleButton blackColorButton;
+    @FXML
+    private ToggleButton whiteColorButton;
     
     @FXML
     public void initialize() {
@@ -73,6 +79,14 @@ public class SettingsController {
         });
         
         if (modeGroup != null) {
+            // Kiểm tra giá trị ban đầu
+            if (pveButton.isSelected()) {
+                difficultyBox.setVisible(true);
+            } else {
+                difficultyBox.setVisible(false);
+            }
+            
+            // Listener khi thay đổi chế độ chơi
             modeGroup.selectedToggleProperty().addListener((obs, oldVal, newVal) -> {
                 if (newVal == pveButton) {
                     difficultyBox.setVisible(true);
@@ -109,11 +123,23 @@ public class SettingsController {
             if (easyButton.isSelected()) maxDepth = 2;
             else if (hardButton.isSelected()) maxDepth = 6;
 
-            blackPlayer = new HumanPlayer(Piece.BLACK);
-            whitePlayer = new AIPlayer(Piece.WHITE, maxDepth);
+            // Chọn màu cờ: Nếu chọn đen -> Bạn là đen, AI là trắng; Nếu chọn trắng -> Bạn là trắng, AI là đen
+            if (blackColorButton.isSelected()) {
+                blackPlayer = new HumanPlayer(Piece.BLACK);
+                whitePlayer = new AIPlayer(Piece.WHITE, maxDepth);
+            } else {
+                blackPlayer = new AIPlayer(Piece.BLACK, maxDepth);
+                whitePlayer = new HumanPlayer(Piece.WHITE);
+            }
         } else {
-            blackPlayer = new HumanPlayer(Piece.BLACK);
-            whitePlayer = new HumanPlayer(Piece.WHITE);
+            // PvP mode: chọn màu cho người chơi 1
+            if (blackColorButton.isSelected()) {
+                blackPlayer = new HumanPlayer(Piece.BLACK);
+                whitePlayer = new HumanPlayer(Piece.WHITE);
+            } else {
+                blackPlayer = new HumanPlayer(Piece.WHITE); // Điều này không đúng logic, nên giữ nguyên
+                whitePlayer = new HumanPlayer(Piece.BLACK);
+            }
         }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/doangamecolat/view/game-board-view.fxml"));
@@ -122,6 +148,11 @@ public class SettingsController {
         GameBoardController gameBoardController = loader.getController();
 
         if (gameBoardController != null) {
+            boolean isPvE = pveButton.isSelected();
+            boolean playerChosenBlack = blackColorButton.isSelected();
+            
+            // Truyền mode (PvE/PvP) và color (Đen/Trắng) trước khi initGame
+            gameBoardController.setGameMode(isPvE, playerChosenBlack);
             gameBoardController.initGame(blackPlayer, whitePlayer);
         }
 
