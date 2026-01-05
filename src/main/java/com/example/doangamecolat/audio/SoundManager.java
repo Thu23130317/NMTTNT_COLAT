@@ -39,11 +39,9 @@ public class SoundManager {
                 placePieceSound = new MediaPlayer(placeMedia);
                 placePieceSound.setVolume(0.6);
             }
-
-
             
             // Nhạc nền
-            URL musicUrl = getClass().getResource("/com/example/doangamecolat/audio/background-music.mp3");
+            URL musicUrl = getClass().getResource("/com/example/doangamecolat/audio/nhacnen.mp3");
             if (musicUrl != null) {
                 Media musicMedia = new Media(musicUrl.toString());
                 backgroundMusic = new MediaPlayer(musicMedia);

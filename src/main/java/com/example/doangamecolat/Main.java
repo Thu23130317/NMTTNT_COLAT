@@ -1,5 +1,7 @@
 package com.example.doangamecolat;
 
+import com.example.doangamecolat.audio.SoundManager;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,6 +28,9 @@ public class Main extends Application {
                 stage.setFullScreen(!stage.isFullScreen());
             }
         });
+        
+        // Phát nhạc nền khi app khởi động
+        SoundManager.getInstance().playBackgroundMusic();
         
         stage.show();
     }
