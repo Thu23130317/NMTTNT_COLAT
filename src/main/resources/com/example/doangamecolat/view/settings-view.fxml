@@ -107,6 +107,32 @@
                     </VBox.margin>
                 </VBox>
 
+                <VBox fx:id="aiTypeBox" alignment="CENTER" spacing="10.0">
+                    <children>
+                        <Label styleClass="section-label" text="Loại AI:" />
+                        <HBox alignment="CENTER" spacing="20.0">
+                            <children>
+                                <ToggleButton fx:id="minimaxButton" minWidth="180.0" mnemonicParsing="false" selected="true" styleClass="ai-type-button" text="MiniMax">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                    <toggleGroup>
+                                        <ToggleGroup fx:id="aiTypeGroup" />
+                                    </toggleGroup>
+                                </ToggleButton>
+                                <ToggleButton fx:id="alphaBetaButton" minWidth="180.0" mnemonicParsing="false" styleClass="ai-type-button" text="AlphaBeta" toggleGroup="$aiTypeGroup">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </ToggleButton>
+                            </children>
+                        </HBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </VBox>
+
                 <VBox alignment="CENTER" spacing="10.0">
                     <children>
                         <Label styleClass="section-label" text="Âm thanh:" />
