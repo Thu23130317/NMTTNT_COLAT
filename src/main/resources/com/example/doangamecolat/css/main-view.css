@@ -1,54 +1,78 @@
+/* =============== MODERN BUTTON STYLE =============== */
+
+.modern-button {
+    -fx-background-color: rgba(42, 42, 58, 0.7);
+    -fx-border-color: linear-gradient(to right, #DAA520, #00CED1);
+    -fx-border-width: 2px;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+    -fx-padding: 10 20 10 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(218, 165, 32, 0.6), 10, 0, 0, 0);
+    -fx-transition: all 0.3s ease;
+}
+
+.modern-button:hover {
+    -fx-background-color: rgba(60, 60, 80, 0.9);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 206, 209, 0.8), 15, 0, 0, 0);
+    -fx-scale-x: 1.08;
+    -fx-scale-y: 1.08;
+}
+
+.modern-button:pressed {
+    -fx-background-color: rgba(30, 30, 50, 0.95);
+    -fx-translate-y: 2;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}
+
+.modern-button:focused {
+    -fx-border-color: #FFD700;
+    -fx-effect: dropshadow(three-pass-box, #FFD700, 20, 0.8, 0, 0);
+}
+
+/* =============== LEGACY MENU BUTTON (for backward compatibility) =============== */
+
 .menu-button {
     -fx-background-color:
-            linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%),
-            linear-gradient(to bottom, #5D4037, #3E2723);
+            linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0.2) 100%),
+            linear-gradient(to bottom, #6D4C41, #4E342E);
 
-    -fx-background-radius: 15;
+    -fx-background-radius: 12;
     -fx-background-insets: 0, 1;
-    -fx-border-color: #FFD700;
+    -fx-border-color: #DAA520;
     -fx-border-width: 2px;
-    -fx-border-radius: 15;
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.6), 10, 0, 0, 0);
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(three-pass-box, rgba(218, 165, 32, 0.8), 12, 0, 0, 0);
 
-    -fx-text-fill: #FFD700;
-    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
     -fx-font-weight: bold;
-    -fx-font-size: 20px;
+    -fx-font-size: 18px;
     -fx-cursor: hand;
+    -fx-padding: 10 20 10 20;
 }
 
 .menu-button:hover {
     -fx-background-color:
-            linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0.1) 100%),
-            linear-gradient(to bottom, #6D4C41, #4E342E); /* Màu gỗ sáng hơn chút */
-    -fx-effect: dropshadow(three-pass-box, #FFD700, 15, 0.3, 0, 0); /* Phát sáng mạnh hơn */
+            linear-gradient(to bottom, rgba(255,255,255,0.35) 0%, rgba(0,0,0,0.15) 100%),
+            linear-gradient(to bottom, #8D6E63, #6D4C41);
+    -fx-effect: dropshadow(three-pass-box, #FFD700, 18, 0.5, 0, 0);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
 .menu-button:pressed {
-    -fx-background-color: linear-gradient(to bottom, #3E2723, #5D4037);
+    -fx-background-color: linear-gradient(to bottom, #4E342E, #6D4C41);
     -fx-translate-y: 2;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
 }
 
-/* =============== MENU ANIMATIONS =============== */
-
-/* Smooth button transitions */
-.menu-button {
-    -fx-transition: all 0.3s ease;
-}
-
-/* Logo fade-in effect */
-.logo-fade-in {
-    -fx-animation: fadeIn 1.0s ease-in;
-}
-
-/* Button group stagger animation */
-.menu-button-group {
-    -fx-animation: staggerIn 0.6s ease-out;
-}
-
-/* Hover scale effect already in :hover state above */
-
-/* Active/Focused state */
 .menu-button:focused {
     -fx-border-color: #FFFF00;
     -fx-effect: dropshadow(three-pass-box, #FFD700, 20, 0.8, 0, 0);

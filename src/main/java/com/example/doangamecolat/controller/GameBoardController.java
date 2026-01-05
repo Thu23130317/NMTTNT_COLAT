@@ -75,12 +75,30 @@ public class GameBoardController implements Initializable{
     private void showSettingsDialog() {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Cài đặt");
-        dialog.setHeaderText("Âm thanh");
         
-        // Tạo nội dung dialog
-        VBox content = new VBox(15);
-        content.setAlignment(Pos.CENTER);
-        content.setPadding(new Insets(20));
+        // Tạo nội dung chính
+        VBox content = new VBox(0);
+        content.setStyle("-fx-background-color: linear-gradient(to bottom, rgba(42, 42, 58, 0.95), rgba(30, 30, 50, 0.95)); " +
+                        "-fx-border-color: linear-gradient(to right, #00CED1, #DAA520); " +
+                        "-fx-border-width: 2px; " +
+                        "-fx-border-radius: 12; " +
+                        "-fx-background-radius: 12;");
+        
+        // Tạo header/menu bar
+        VBox headerBox = new VBox();
+        headerBox.setPadding(new Insets(12, 20, 12, 20));
+        headerBox.setStyle("-fx-background-color: linear-gradient(to right, rgba(0, 206, 209, 0.6), rgba(218, 165, 32, 0.4)); " +
+                          "-fx-border-color: linear-gradient(to right, #00CED1, #DAA520); " +
+                          "-fx-border-width: 0 0 2 0;");
+        
+        Label titleLabel = new Label("Âm thanh");
+        titleLabel.setStyle("-fx-text-fill: #00CED1; -fx-font-size: 16px; -fx-font-weight: bold;");
+        headerBox.getChildren().add(titleLabel);
+        
+        // Tạo content box với padding
+        VBox contentBox = new VBox(15);
+        contentBox.setAlignment(Pos.CENTER);
+        contentBox.setPadding(new Insets(20));
         
         SettingsManager settingsManager = SettingsManager.getInstance();
         SoundManager soundManager = SoundManager.getInstance();
@@ -88,27 +106,78 @@ public class GameBoardController implements Initializable{
         // Toggle hiệu ứng âm thanh
         ToggleButton soundEffectsToggle = new ToggleButton("🔊 Hiệu ứng âm thanh");
         soundEffectsToggle.setSelected(settingsManager.isSoundEffectsEnabled());
-        soundEffectsToggle.setPrefWidth(200);
-        soundEffectsToggle.setStyle("-fx-font-size: 14px;");
+        soundEffectsToggle.setPrefWidth(220);
+        soundEffectsToggle.setStyle("-fx-font-size: 14px; " +
+                                   "-fx-padding: 10px; " +
+                                   "-fx-background-color: linear-gradient(to bottom, rgba(0, 206, 209, 0.6), rgba(0, 206, 209, 0.3)); " +
+                                   "-fx-text-fill: white; " +
+                                   "-fx-border-color: #00CED1; " +
+                                   "-fx-border-width: 2px; " +
+                                   "-fx-border-radius: 8; " +
+                                   "-fx-background-radius: 8;");
+        
+        // Update initial text
+        if (settingsManager.isSoundEffectsEnabled()) {
+            soundEffectsToggle.setText("🔊 Hiệu ứng âm thanh");
+        } else {
+            soundEffectsToggle.setText("🔇 Hiệu ứng âm thanh");
+        }
+        
         soundEffectsToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
             settingsManager.setSoundEffectsEnabled(newVal);
             soundManager.setSoundEffectsEnabled(newVal);
+            soundEffectsToggle.setText(newVal ? "🔊 Hiệu ứng âm thanh" : "🔇 Hiệu ứng âm thanh");
         });
         
         // Toggle nhạc nền
         ToggleButton musicToggle = new ToggleButton("🎵 Nhạc nền");
         musicToggle.setSelected(settingsManager.isMusicEnabled());
-        musicToggle.setPrefWidth(200);
-        musicToggle.setStyle("-fx-font-size: 14px;");
+        musicToggle.setPrefWidth(220);
+        musicToggle.setStyle("-fx-font-size: 14px; " +
+                            "-fx-padding: 10px; " +
+                            "-fx-background-color: linear-gradient(to bottom, rgba(0, 206, 209, 0.6), rgba(0, 206, 209, 0.3)); " +
+                            "-fx-text-fill: white; " +
+                            "-fx-border-color: #00CED1; " +
+                            "-fx-border-width: 2px; " +
+                            "-fx-border-radius: 8; " +
+                            "-fx-background-radius: 8;");
+        
+        // Update initial text
+        if (settingsManager.isMusicEnabled()) {
+            musicToggle.setText("🎵 Nhạc nền");
+        } else {
+            musicToggle.setText("🔕 Nhạc nền");
+        }
+        
         musicToggle.selectedProperty().addListener((obs, oldVal, newVal) -> {
             settingsManager.setMusicEnabled(newVal);
             soundManager.setMusicEnabled(newVal);
+            musicToggle.setText(newVal ? "🎵 Nhạc nền" : "🔕 Nhạc nền");
         });
         
-        content.getChildren().addAll(soundEffectsToggle, musicToggle);
+        contentBox.getChildren().addAll(soundEffectsToggle, musicToggle);
+        
+        content.getChildren().addAll(headerBox, contentBox);
         
         dialog.getDialogPane().setContent(content);
+        dialog.getDialogPane().setStyle("-fx-background-color: rgba(42, 42, 58, 0.95);");
+        
+        // Style các nút button
+        dialog.getDialogPane().getButtonTypes().clear();
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+        
+        // Tìm và style nút Close
+        dialog.getDialogPane().lookupButton(ButtonType.CLOSE).setStyle(
+            "-fx-background-color: linear-gradient(to bottom, rgba(218, 165, 32, 0.7), rgba(218, 165, 32, 0.4)); " +
+            "-fx-text-fill: white; " +
+            "-fx-border-color: #DAA520; " +
+            "-fx-border-width: 2px; " +
+            "-fx-border-radius: 6; " +
+            "-fx-background-radius: 6; " +
+            "-fx-padding: 8px 20px; " +
+            "-fx-font-size: 12px; " +
+            "-fx-font-weight: bold;"
+        );
         
         dialog.showAndWait();
     }
@@ -208,6 +277,11 @@ public class GameBoardController implements Initializable{
                 var children = ((StackPane) node).getChildren();
                 children.removeIf(child -> child instanceof Circle && child.getId() != null && child.getId().equals("valid-dot"));
             }
+        }
+        
+        // Không hiển thị nước đi hợp lệ nếu game đã kết thúc
+        if (game.isGameOver()) {
+            return;
         }
         
         // Thêm dấu chấm xanh cho nước đi hợp lệ

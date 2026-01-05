@@ -40,16 +40,13 @@ public class GameOverController {
         scoreWhiteLabel.setText(String.valueOf(whiteScore));
         
         if (blackScore > whiteScore) {
-            winnerLabel.setText("BLACK WINS!");
-            winnerLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 18px; -fx-effect: dropshadow(one-pass-box, black, 3, 0.5, 0, 0);");
+            winnerLabel.setText("BẠN THẮNG!");
             winnerLabel.setTextFill(javafx.scene.paint.Color.web("#FFD700"));
         } else if (whiteScore > blackScore) {
-            winnerLabel.setText("WHITE WINS!");
-            winnerLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 18px; -fx-effect: dropshadow(one-pass-box, black, 3, 0.5, 0, 0);");
-            winnerLabel.setTextFill(javafx.scene.paint.Color.web("#E0E0E0"));
+            winnerLabel.setText("ĐỐI THỦ THẮNG!");
+            winnerLabel.setTextFill(javafx.scene.paint.Color.web("#00CED1"));
         } else {
-            winnerLabel.setText("IT'S A DRAW!");
-            winnerLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 18px; -fx-effect: dropshadow(one-pass-box, black, 3, 0.5, 0, 0);");
+            winnerLabel.setText("HÒA NHAU!");
             winnerLabel.setTextFill(javafx.scene.paint.Color.web("#FFD700"));
         }
     }
